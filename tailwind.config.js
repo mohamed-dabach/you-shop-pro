@@ -6,11 +6,11 @@ export default {
     extend: {
       colors: {
         // custom colors
-        primary: "#30c7b5",
-        secondary: "#00ac97",
-        "semi-white": "#f3f6f3",
-        "semi-black": "#14261c",
-        "semi-gray": "#4f5655",
+        primary: "#edb932",
+        secondary: "#bc9127",
+        "semi-black": "#1a1a1a",
+        "semi-gray": "#6c6c6c",
+        "semi-white": "#fafafa",
       },
     },
   },
