@@ -1,21 +1,26 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./pages/Layout";
+import About from "./pages/about";
+import Products from "./pages/products";
+import Home from "./pages/home";
+import Rooms from "./pages/Rooms";
+import Contact from "./pages/Contact";
+
 function App() {
   return (
     <>
-      <div className="bg-primary w-[100px] h-[100px]">
-        <h1 className="text-semi-gray">dach tash git bash 9ash med</h1>
-      </div>
-      <div className="bg-semi-gray w-[100px] h-[100px]">
-        <h1 className="text-secondary">dach tash git bash 9ash med</h1>
-      </div>
-      <div className="bg-semi-white w-[100px] h-[100px]">
-        <h1 className="text-semi-black">dach tash git bash 9ash med</h1>
-      </div>
-      <div className="bg-secondary w-[100px] h-[100px]">
-        <h1 className="text-semi-white">dach tash git bash 9ash med</h1>
-      </div>
-      <div className="bg-semi-black w-[100px] h-[100px]">
-        <h1 className="text-primary">dach tash git bash 9ash med</h1>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="products" element={<Products />} />
+            <Route path="rooms" element={<Rooms />} />
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="*" element={<>check your link</>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
