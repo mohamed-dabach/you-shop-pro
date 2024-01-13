@@ -1,23 +1,25 @@
-import  { useState } from 'react';
+import { useState } from "react";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  
+
   return (
     <nav className=" p-3 shadow-lg bg-white">
       <div className="container mx-auto flex flex-col lg:flex-row justify-start relative lg:justify-between">
-
         {/* Logo */}
-        <a href="no" className="text-black font-bold flex items-">
-          <img src={'./kayuu-logo-dark.svg'} alt="Logo" className='h-6 w-auto inline-block mr-2' />
+        <a href="no" className="text-black font-bold flex w-fit ">
+          <img
+            src={"./kayuu-logo-dark.svg"}
+            alt="Logo"
+            className="h-6 w-auto inline-block mr-2"
+          />
         </a>
 
         {/*  Menu for Small Screens */}
-        <div className='lg:hidden absolute right-0'>
+        <div className="lg:hidden absolute right-0">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className={`text-black focus:outline-none`}
-
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -25,25 +27,70 @@ const NavBar = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className='w-auto h-6 mr-8 transition-transform duration-300'
-
+              className="w-auto h-6 mr-8 transition-transform duration-300"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
             </svg>
           </button>
         </div>
 
         {/* Menu items for Large Screens */}
-        <ul className={`hidden lg:flex space-x-4 m-0 lg:items-center ${menuOpen ? 'hidden' : 'block'}`}>
-          <li><a href="no" className="text-black no-underline hover:text-[#ffb703]">Home</a></li>
-          <li><a href="no" className="text-black no-underline hover:text-[#ffb703]">Products</a></li>
-          <li><a href="no" className="text-black no-underline hover:text-[#ffb703]">Rooms</a></li>
-          <li><a href="no" className="text-black no-underline hover:text-[#ffb703]">About Us</a></li>
-          <li><a href="no" className="text-black no-underline hover:text-[#ffb703]">Contact Us</a></li>
+        <ul
+          className={`hidden lg:flex space-x-4 m-0 lg:items-center ${
+            menuOpen ? "hidden" : "block"
+          }`}
+        >
+          <li>
+            <a
+              href="no"
+              className="text-black no-underline hover:text-[#ffb703]" 
+            >
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              href="no"
+              className="text-black no-underline hover:text-[#ffb703]"
+            >
+              Products
+            </a>
+          </li>
+          <li>
+            <a
+              href="no"
+              className="text-black no-underline hover:text-[#ffb703]"
+            >
+              Rooms
+            </a>
+          </li>
+          <li>
+            <a
+              href="no"
+              className="text-black no-underline hover:text-[#ffb703]"
+            >
+              About Us
+            </a>
+          </li>
+          <li>
+            <a
+              href="no"
+              className="text-black no-underline hover:text-[#ffb703]"
+            >
+              Contact Us
+            </a>
+          </li>
 
           {/* Cart */}
           <li>
-            <a href="no" className="text-[#ffb703] hover:text-gray-300 flex items-center">
+            <a
+              href="no"
+              className="text-[#ffb703] hover:text-gray-300 flex items-center"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -62,14 +109,34 @@ const NavBar = () => {
           </li>
         </ul>
 
-         {/* Hamburger Menu for Small Screens */}
-         <div className={`lg:hidden py-8 ${menuOpen ? 'block' : 'hidden'}`}>
+        {/* Hamburger Menu for Small Screens */}
+        <div className={`lg:hidden py-8 ${menuOpen ? "block" : "hidden"}`}>
           <ul className="text-black">
-            <li><a href="no" className="block py-2 hover:text-[#ffb703]">Home</a></li>
-            <li><a href="no" className="block py-2 hover:text-[#ffb703]">Products</a></li>
-            <li><a href="no" className="block py-2 hover:text-[#ffb703]">Rooms</a></li>
-            <li><a href="no" className="block py-2 hover:text-[#ffb703]">About Us</a></li>
-            <li><a href="no" className="block py-2 hover:text-[#ffb703]">Contact Us</a></li>
+            <li>
+              <a href="no" className="block py-2 hover:text-[#ffb703]">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="no" className="block py-2 hover:text-[#ffb703]">
+                Products
+              </a>
+            </li>
+            <li>
+              <a href="no" className="block py-2 hover:text-[#ffb703]">
+                Rooms
+              </a>
+            </li>
+            <li>
+              <a href="no" className="block py-2 hover:text-[#ffb703]">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="no" className="block py-2 hover:text-[#ffb703]">
+                Contact Us
+              </a>
+            </li>
           </ul>
         </div>
       </div>
