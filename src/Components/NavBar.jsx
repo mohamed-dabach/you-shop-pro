@@ -1,22 +1,21 @@
-import { useState } from "react";
+import  { useState } from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../Assets/kayuu-Logo-dark.svg';
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav className=" p-3 shadow-lg bg-white">
-      <div className="container mx-auto flex flex-col lg:flex-row justify-start relative lg:justify-between">
+      <div className="container mx-auto flex max-w-[1440px] flex-col lg:flex-row justify-start relative lg:justify-between ">
+
         {/* Logo */}
-        <a href="no" className="text-black font-bold flex w-fit ">
-          <img
-            src={"./kayuu-logo-dark.svg"}
-            alt="Logo"
-            className="h-6 w-auto inline-block mr-2"
-          />
+        <a href="#" className="text-black w-fit font-bold flex ">
+          <img src={logo} alt="Logo" className='h-6 w-auto inline-block mr-2 ' />
         </a>
 
         {/*  Menu for Small Screens */}
-        <div className="lg:hidden absolute right-0">
+        <div className='lg:hidden absolute right-0'>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className={`text-black focus:outline-none`}
@@ -39,58 +38,17 @@ const NavBar = () => {
         </div>
 
         {/* Menu items for Large Screens */}
-        <ul
-          className={`hidden lg:flex space-x-4 m-0 lg:items-center ${
-            menuOpen ? "hidden" : "block"
-          }`}
-        >
-          <li>
-            <a
-              href="no"
-              className="text-black no-underline hover:text-[#ffb703]" 
-            >
-              Home
-            </a>
-          </li>
-          <li>
-            <a
-              href="no"
-              className="text-black no-underline hover:text-[#ffb703]"
-            >
-              Products
-            </a>
-          </li>
-          <li>
-            <a
-              href="no"
-              className="text-black no-underline hover:text-[#ffb703]"
-            >
-              Rooms
-            </a>
-          </li>
-          <li>
-            <a
-              href="no"
-              className="text-black no-underline hover:text-[#ffb703]"
-            >
-              About Us
-            </a>
-          </li>
-          <li>
-            <a
-              href="no"
-              className="text-black no-underline hover:text-[#ffb703]"
-            >
-              Contact Us
-            </a>
-          </li>
+        <ul  className={` mx-4 mt-3  lg:m-0 lg:items-center gap-3 flex-col lg:flex-row ${menuOpen ? ' flex' : ' hidden'}`}>
 
-          {/* Cart */}
+          <li ><Link to={'/'} className="text-black no-underline hover:text-primary">Home</Link></li>
+          <li ><Link to={'/products'} className="text-black no-underline hover:text-primary">Products</Link></li>
+          <li ><Link to={'/rooms'} className="text-black no-underline hover:text-primary">Rooms</Link></li>
+          <li ><Link to={'/about'} className="text-black no-underline hover:text-primary">About Us</Link></li>
+          <li ><Link to={'/contact'} className="text-black no-underline hover:text-primary">Contact Us</Link></li>
+         
+        
           <li>
-            <a
-              href="no"
-              className="text-[#ffb703] hover:text-gray-300 flex items-center"
-            >
+            <a href="no" className="hidden  text-primary hover:text-gray-300 lg:flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -106,39 +64,19 @@ const NavBar = () => {
                 />
               </svg>
             </a>
-          </li>
-        </ul>
+          </li> </ul>
+      
 
-        {/* Hamburger Menu for Small Screens */}
-        <div className={`lg:hidden py-8 ${menuOpen ? "block" : "hidden"}`}>
+         {/* Hamburger Menu for Small Screens */}
+         {/* <div className={`lg:hidden py-8 ${menuOpen ? 'block' : 'hidden'}`}>
           <ul className="text-black">
-            <li>
-              <a href="no" className="block py-2 hover:text-[#ffb703]">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="no" className="block py-2 hover:text-[#ffb703]">
-                Products
-              </a>
-            </li>
-            <li>
-              <a href="no" className="block py-2 hover:text-[#ffb703]">
-                Rooms
-              </a>
-            </li>
-            <li>
-              <a href="no" className="block py-2 hover:text-[#ffb703]">
-                About Us
-              </a>
-            </li>
-            <li>
-              <a href="no" className="block py-2 hover:text-[#ffb703]">
-                Contact Us
-              </a>
-            </li>
+            <li><Link to={'/'} className="text-black no-underline hover:text-primary">Home</Link></li>
+            <li><Link to={'/products'} className="text-black no-underline hover:text-primary">Products</Link></li>
+            <li><Link to={'/rooms'} className="text-black no-underline hover:text-primary">Rooms</Link></li>
+            <li><a href="no" className="block py-2 hover:text-primary">About Us</a></li>
+            <li><a href="no" className="block py-2 hover:text-primary">Contact Us</a></li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </nav>
   );
