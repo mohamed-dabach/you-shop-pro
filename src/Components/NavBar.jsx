@@ -6,7 +6,7 @@ const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className=" p-3 px-10 shadow-lg bg-white">
+    <nav className=" p-3 px-10 shadow-lg bg-white  ">
       <div className="container mx-auto flex max-w-[1440px] flex-col md:flex-row justify-start relative md:justify-between ">
         <Link to={"/"} className="text-black w-fit font-bold flex ">
           <img
