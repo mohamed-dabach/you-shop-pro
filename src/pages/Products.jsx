@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 import ProductList from "../Components/ProductList";
 import SideProductFilters from "../Components/SideProductFilter";
 import { useState } from "react";
 const Products = ({}) => {
   const [showFilters, setShowFilters] = useState(false);
+=======
+const Products = () => {
+>>>>>>> main
   const list = [
     {
       id: 1928,
@@ -89,9 +93,7 @@ const Products = ({}) => {
       category: "Bedroom",
     },
   ];
-  function handleToggleFilters() {
-    setShowFilters((prev) => !prev);
-  }
+
   return (
     <>
       {showFilters && (
