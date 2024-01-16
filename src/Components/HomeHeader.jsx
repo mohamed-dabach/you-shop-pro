@@ -2,7 +2,6 @@ import React from 'react'
 
 function HomeHeader() {
   return (
-
     <div className='block relative '>
       <div className='absolute top-0 left-0 w-full h-full bg-[url("/headerimg.jpg")] opacity-[0.87]  bg-cover bg-center z-[-1]'></div>
       <div className='absolute bg-black w-full h-full left-0 right-0 bottom-0 opacity-[0.47] bg-cover z-[-1] bg-center top-0'></div>
@@ -31,7 +30,7 @@ function HomeHeader() {
               </a>
             </span>
           </div >
-          <div className='flex justify-between mt-[100px] sm:mt-[150px] lg:mt-[200px]'>
+          <div className='flex mb-5 justify-between mt-[100px] sm:mt-[150px] lg:mt-[200px]'>
             <div>
               <span>
                 <a href="#">
