@@ -31,7 +31,7 @@ const SideProductFilters = ({ handleToggleFilters }) => {
             className=" ps-2 border"
             placeholder="Search Product"
           />
-          <button className="uppercase border bg-primary text-sm p-2 tracking-wide font-semibold">
+          <button className="uppercase border bg-primary text-sm p-2 text-semi-black tracking-wide font-semibold">
             Search
           </button>
         </div>
@@ -41,6 +41,15 @@ const SideProductFilters = ({ handleToggleFilters }) => {
             maxMinPrice={maxMinPrice}
             setMaxMinPrice={setMaxMinPrice}
           />
+        </div>
+        <div className="flex items-center gap-3">
+          <button className="uppercase border bg-primary text-semi-black text-sm p-2 tracking-wide font-semibold">
+            filter
+          </button>
+          <p className=" tracking-wider">
+            Price:{" "}
+            <span className="font-bold ">{`$${maxMinPrice[0]} - $${maxMinPrice[1]}`}</span>
+          </p>
         </div>
       </div>
     </>
@@ -70,7 +79,7 @@ SideProductFilters.propTypes = {
 };
 
 RangeSlider.propTypes = {
-  maxMinPrice: PropTypes.number.isRequired,
+  maxMinPrice: PropTypes.array.isRequired,
   setMaxMinPrice: PropTypes.func.isRequired,
 };
 export default SideProductFilters;
