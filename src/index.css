@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
   --color-primary: #edb932;
   --color-secondary: #bc9127;
@@ -19,3 +20,4 @@
 * {
   color: var(--color-semi-gray);
 }
+
