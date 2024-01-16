@@ -84,5 +84,12 @@
       "price": "580.50",
       "category": "Bedroom"
     }
+  ],
+  "categories": [
+    { "category": "Bathroom", "count": 4 },
+    { "category": "Living Room", "count": 7 },
+    { "category": "Bedroom", "count": 2 },
+    { "category": "Cabinet", "count": 4 },
+    { "category": "Kitchen", "count": 49 }
   ]
 }

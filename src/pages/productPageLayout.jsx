@@ -1,12 +1,9 @@
-<<<<<<< HEAD
+import { Outlet } from "react-router-dom";
 import ProductList from "../Components/ProductList";
 import SideProductFilters from "../Components/SideProductFilter";
 import { useState } from "react";
-const Products = ({}) => {
-  const [showFilters, setShowFilters] = useState(false);
-=======
 const Products = () => {
->>>>>>> main
+  const [showFilters, setShowFilters] = useState(false);
   const list = [
     {
       id: 1928,
@@ -93,7 +90,9 @@ const Products = () => {
       category: "Bedroom",
     },
   ];
-
+  function handleToggleFilters() {
+    setShowFilters((prev) => !prev);
+  }
   return (
     <>
       {showFilters && (
@@ -101,6 +100,7 @@ const Products = () => {
       )}
       <div className="bg-semi-white">
         <div className=" container m-auto w-full my-5  px-10 bg-white ">
+          <Outlet />
           <div className="w-full flex justify-between py-5 max-sm:flex-col">
             <div className=" flex max-md:flex-col ">
               <button

@@ -1,4 +1,3 @@
-import React from "react"
 import WhiteLogo from "../Assets/kayuu-logo-white.svg" 
 import { Link } from "react-router-dom"
 
