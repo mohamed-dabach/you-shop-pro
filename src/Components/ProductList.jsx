@@ -15,7 +15,7 @@ const ProductList = ({ list }) => {
 const ItemProduct = ({ product }) => {
   return (
     <li className="p-1 border text-center">
-      <Link to="#">
+      <Link to={`/product/${product.id}`}>
         <img
           src={product.img}
           className="max-w-full w-full "
@@ -33,6 +33,7 @@ const ItemProduct = ({ product }) => {
 
 ItemProduct.propTypes = {
   product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,

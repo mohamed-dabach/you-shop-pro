@@ -11,11 +11,11 @@
 }
 
 /* change the selection color */
+
 ::selection {
   background-color: var(--color-primary);
   color: var(--color-semi-white);
 }
-
 * {
   color: var(--color-semi-gray);
 }

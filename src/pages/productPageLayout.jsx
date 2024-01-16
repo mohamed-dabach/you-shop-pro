@@ -1,7 +1,8 @@
+import { Outlet } from "react-router-dom";
 import ProductList from "../Components/ProductList";
 import SideProductFilters from "../Components/SideProductFilter";
 import { useState } from "react";
-const Products = ({}) => {
+const Products = () => {
   const [showFilters, setShowFilters] = useState(false);
   const list = [
     {
@@ -99,6 +100,7 @@ const Products = ({}) => {
       )}
       <div className="bg-semi-white">
         <div className=" container m-auto w-full my-5  px-10 bg-white ">
+          <Outlet />
           <div className="w-full flex justify-between py-5 max-sm:flex-col">
             <div className=" flex max-md:flex-col ">
               <button
