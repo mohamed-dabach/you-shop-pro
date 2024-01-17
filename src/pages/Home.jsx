@@ -1,4 +1,5 @@
 import HomeHeader from "../Components/HomeHeader";
+import WhatPeopleSay from "../Components/WhatPeopleSay";
 import HomeMostSallingProduct from "../Components/HomeMostSallingProduct";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
     <>
       <HomeHeader />
       <HomeMostSallingProduct />
+      <WhatPeopleSay />
     </>
   );
 };
