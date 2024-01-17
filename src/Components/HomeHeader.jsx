@@ -33,7 +33,7 @@ function HomeHeader() {
           <div className='flex justify-between mt-[100px] sm:mt-[150px] lg:mt-[200px]'>
             <div className='pb-6'>
               <span>
-                <a href="#" alt='scroll down'>
+                <a href="#" alt='scrolldown'>
                   <span className='text-semi-white font-medium uppercase tracking-wider'>Scroll Down</span>
                 </a>
               </span>
