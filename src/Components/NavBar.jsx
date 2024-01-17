@@ -4,7 +4,6 @@ import logo from "../Assets/kayuu-Logo-dark.svg";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
   return (
     <nav className=" p-3 px-10 shadow-lg bg-white  ">
       <div className="container mx-auto flex max-w-[1440px] flex-col md:flex-row justify-start relative md:justify-between ">
@@ -37,7 +36,6 @@ const NavBar = () => {
             </svg>
           </button>
         </div>
-
         <ul
           className={` mx-4 mt-3 md:flex  md:m-0 md:items-center gap-3 flex-col md:flex-row ${
             menuOpen ? "" : "hidden"
@@ -96,6 +94,7 @@ const NavBar = () => {
                 stroke="currentColor"
                 className="w-6 h-6 "
               >
+                
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
