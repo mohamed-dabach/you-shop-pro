@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <>
       <footer className="bg-semi-black w-full py-4 flex-col justify-center items-center ">
-        <div className="w-full px-8 flex flex-wrap justify-between py-8">
+        <div className="w-full container px-8 flex flex-wrap justify-between py-8">
           <div className=" w-full md:w-1/3 lg:w-w-4/12 xl:w-4/12  ">
             <ul className="py-4 text-semi-white font-normal ">
               <li className="mb-10">
@@ -128,13 +128,13 @@ export default function Footer() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="w-full text-white px-6 py-10 font-normal border-t flex flex-wrap  justify-between items-center">
-          <div className="w-full text-center mb-4 lg:w-3/12 xl:2/12  ">
-            Copyright © 2024 Online Furniture Store
-          </div>
-          <div className="w-full text-center lg:w-3/12 xl:2/12 mb-12">
-            Powered by Online Furniture Store
+          <div className="w-full text-white px-6 py-10 font-normal border-t flex flex-wrap  justify-between items-center">
+            <div className="w-full text-center mb-4 lg:w-3/12 xl:2/12  ">
+              Copyright © 2024 Online Furniture Store
+            </div>
+            <div className="w-full text-center lg:w-3/12 xl:2/12 mb-12">
+              Powered by Online Furniture Store
+            </div>
           </div>
         </div>
       </footer>

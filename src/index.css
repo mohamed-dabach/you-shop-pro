@@ -19,3 +19,8 @@
 * {
   color: var(--color-semi-gray);
 }
+
+.container {
+  max-width: 1440px !important;
+  margin: auto;
+}
