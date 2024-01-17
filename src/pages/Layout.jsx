@@ -1,11 +1,22 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../Components/NavBar";
+import CardSide from "../Components/CardSide";
+import { useState } from "react";
 
 
 const Layout = () => {
+
+  const [toggle, setToggle] = useState(false);
+
+  const handleClick = () => {
+    setToggle((prevState) => !prevState);
+    console.log(toggle)
+  };
+
   return (
     <>
-       <NavBar/>
+       <NavBar handleClick={handleClick}/>
+       <CardSide toggle={toggle} />
       <h1>Layout</h1>
       <Outlet />
     </>

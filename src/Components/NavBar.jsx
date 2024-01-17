@@ -2,10 +2,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../Assets/kayuu-Logo-dark.svg";
 
-const NavBar = () => {
+
+
+const NavBar = ({handleClick}) => {
+ 
+
   const [menuOpen, setMenuOpen] = useState(false);
 
-  return (
+  return (<>
+ 
     <nav className=" p-3 px-10 shadow-lg bg-white">
       <div className="container mx-auto flex max-w-[1440px] flex-col md:flex-row justify-start relative md:justify-between ">
         <Link to={"/"} className="text-black w-fit font-bold flex ">
@@ -84,7 +89,7 @@ const NavBar = () => {
             </Link>
           </li>
           <li className="ms-3">
-            <button className="hidden  text-primary relative hover:text-gray-300 md:flex items-center">
+          <button onClick={handleClick} className="hidden  text-primary relative hover:text-gray-300 md:flex items-center">
               <div className="absolute text-semi-black font-semibold top-[-5px] left-[-10px] bg-primary flex justify-center items-center p-0 m-0 w-5 h-5 text-[12px] rounded-2xl">
                 22
               </div>
@@ -107,7 +112,9 @@ const NavBar = () => {
         </ul>
       </div>
     </nav>
+    </>
   );
 };
+
 
 export default NavBar;

@@ -1,9 +1,8 @@
-import Footer from "../Components/footer";
-
 const Rooms = () => {
   return <>
-  <Footer/>
-  </>;
+
+ rooms
+ </>;
 };
 
 export default Rooms;
