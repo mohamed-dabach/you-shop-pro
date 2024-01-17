@@ -21,7 +21,10 @@ function App() {
                 element={<CategoryPageHeader />}
               />
             </Route>
-              <Route path="/product/:id" element={<>show details product page</>} />
+            <Route
+              path="/product/:id"
+              element={<>show details product page</>}
+            />
             <Route path="rooms" element={<Rooms />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
