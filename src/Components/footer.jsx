@@ -1,9 +1,11 @@
 import WhiteLogo from "../Assets/kayuu-logo-white.svg";
 import { Link } from "react-router-dom";
+import SeeLastCol from "./SeeLastCol";
 
 export default function Footer() {
   return (
     <>
+    <SeeLastCol/>
       <footer className="bg-semi-black w-full py-4 flex-col justify-center items-center ">
         <div className="w-full container px-8 flex flex-wrap justify-between py-8">
           <div className=" w-full md:w-1/3 lg:w-w-4/12 xl:w-4/12  ">
