@@ -11,7 +11,7 @@ export default function SeeLastCol() {
               <span className="absolute top-[8px] w-[35px] h-[1px] left-0 right-0 bottom-0 bg-primary"></span>
               SUBSCRIBE TO OUR NEWSLETTER
             </span>
-            <h1 className="   mt-8 text-4xl text-semi-black font-semibold">
+            <h1 className="mt-8 text-4xl text-semi-black font-semibold">
               See The Latest Collection & Get Special Offer
             </h1>
             <div className="flex flex-col md:flex-col  lg:flex-row justify-between sm:items-center gap-3 mt-8 mb-3">
