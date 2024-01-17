@@ -15,13 +15,13 @@ function HomeHeader() {
           </div>
           <div>
             <div className='mb-5 text-semi-white'>
-              <h1 className='bold text-[30px]  md:text-[48px] leading-tigh'>
+              <h1 className='bold text-[30px] text-semi-white  md:text-[48px] leading-tigh'>
                 Make Yourself At Home
               </h1>
             </div>
           </div>
           <div className='text-semi-white mb-10 '>
-            <p className='sm:max-w-[100%] max-w-[75%] lg:max-w-[50%] sm:text-[16px]'>Vestibulum, diam vulputate amet cras in diam quis turpis curabitur tellus aliquet tellus iaculis tempus, sollicitudin massa duis eleifend egestas turpis sit etiam commodo viverra lacinia ipsum convallis sed augue purus scelerisque non vestibulum elementum mi, pellentesque leo tincidunt integer.</p>
+            <p className='sm:max-w-[100%] max-w-[75%] lg:max-w-[50%] sm:text-[16px] text-semi-white'>Vestibulum, diam vulputate amet cras in diam quis turpis curabitur tellus aliquet tellus iaculis tempus, sollicitudin massa duis eleifend egestas turpis sit etiam commodo viverra lacinia ipsum convallis sed augue purus scelerisque non vestibulum elementum mi, pellentesque leo tincidunt integer.</p>
           </div>
           <div>
             <span className='bg-primary mb-3 px-8 py-3 max-w-[150px] hover:bg-semi-white '>
