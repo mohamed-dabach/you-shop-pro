@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --color-primary: #edb932;
   --color-secondary: #bc9127;
@@ -12,12 +11,11 @@
 }
 
 /* change the selection color */
+
 ::selection {
   background-color: var(--color-primary);
   color: var(--color-semi-white);
 }
-
 * {
   color: var(--color-semi-gray);
 }
-
