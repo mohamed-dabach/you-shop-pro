@@ -1,4 +1,5 @@
 import HomeHeader from "../Components/HomeHeader";
+import WhatPeopleSay from "../Components/WhatPeopleSay";
 import HomeMostSallingProduct from "../Components/HomeMostSallingProduct";
 import SeeLastCol from "../Components/SeeLastCol";
 
@@ -7,7 +8,10 @@ const Home = () => {
     <>
       <HomeHeader />
       <HomeMostSallingProduct />
-      <SeeLastCol />
+
+<WhatPeopleSay />  
+    <SeeLastCol />
+
     </>
   );
 };
