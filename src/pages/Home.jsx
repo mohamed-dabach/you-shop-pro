@@ -1,11 +1,13 @@
 import HomeHeader from "../Components/HomeHeader";
+import HomeMostSallingProduct from "../Components/HomeMostSallingProduct";
 
 const Home = () => {
   return (
     <>
-    <HomeHeader/>
+      <HomeHeader />
+      <HomeMostSallingProduct />
     </>
-  )
+  );
 };
 
 export default Home;
