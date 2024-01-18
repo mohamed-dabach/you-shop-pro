@@ -1,6 +1,42 @@
 import RoomComponent from "../Components/roomComponent";
 
 const Rooms = () => {
+  const rooms = [
+    {
+      id: 1,
+      room: "Living Room",
+      img: "/rooms/bedroom-img.jpg",
+      disc: "Massa cras egestas laoreet montes, dapibus eu sit etiam curabitur faucibus habitasse lectus vestibulum leo, odio dolor quis maecenas faucibus vulputate pharetra.",
+      items: [
+        "Massa cras egestas laoreet montes",
+        "dapibus eu sit etiam curabitur",
+        "faucibus habitasse lectus vestibulum leo",
+        "odio dolor quis maecenas faucibus vulputate pharetra",
+        "Nulla placerat viverra",
+        "Cursus viverra",
+        "Vitae interdum eget",
+        "Risus tempus elementum",
+        "Aliquet dignissim",
+      ],
+    },
+    // {
+    //   id: 2,
+    //   room: "Bedroom",
+    //   img: "/rooms/bedroom-img.jpg",
+    //   items: [
+    //     "Massa cras egestas laoreet montes",
+    //     "dapibus eu sit etiam curabitur",
+    //     "faucibus habitasse lectus vestibulum leo",
+    //     "odio dolor quis maecenas faucibus vulputate pharetra",
+    //     "Nulla placerat viverra",
+    //     "Cursus viverra",
+    //     "Vitae interdum eget",
+    //     "Risus tempus elementum",
+    //     "Aliquet dignissim",
+    //   ],
+    // },
+  ];
+
   return (
     <>
       <div className="container">
@@ -12,7 +48,10 @@ const Rooms = () => {
             eleifend egestas turpis sit etiam.
           </p>
         </div>
-        <RoomComponent />
+        {rooms &&
+          rooms.map((room) => {
+            return <RoomComponent key={room.id} room={room} />;
+          })}
       </div>
     </>
   );
