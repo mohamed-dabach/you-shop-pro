@@ -1,6 +1,7 @@
 import RoomComponent from "../Components/roomComponent";
 import SeeLastCol from "../Components/SeeLastCol"
 const Rooms = () => {
+
   const rooms = [
     {
       id: 1,
@@ -109,6 +110,7 @@ const Rooms = () => {
       <SeeLastCol />
     </div>
   );
+
 };
 
 export default Rooms;
