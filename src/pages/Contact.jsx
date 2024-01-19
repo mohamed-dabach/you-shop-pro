@@ -1,5 +1,11 @@
+import SeeLastCol from "../Components/SeeLastCol";
+
 const Contact = () => {
-  return <>contact</>;
+  return (
+    <>
+      <SeeLastCol />
+    </>
+  );
 };
 
 export default Contact;
