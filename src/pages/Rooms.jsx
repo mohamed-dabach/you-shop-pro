@@ -6,7 +6,7 @@ const Rooms = () => {
     {
       id: 1,
       room: "Living Room",
-      img: "/src/Assets/rooms/living-room-img.jpg",
+      img: "rooms/living-room-img.jpg",
       disc: "Massa cras egestas laoreet montes, dapibus eu sit etiam curabitur faucibus habitasse lectus vestibulum leo, odio dolor quis maecenas faucibus vulputate pharetra.",
       items: [
         "Massa cras egestas laoreet montes",
@@ -24,7 +24,7 @@ const Rooms = () => {
       id: 2,
       room: "Beth room",
       disc: "Massa cras egestas laoreet montes, dapibus eu sit etiam curabitur faucibus habitasse lectus vestibulum leo, odio dolor quis maecenas faucibus vulputate pharetra.",
-      img: "/src/Assets/rooms/bath-room-img.jpg",
+      img: "rooms/bath-room-img.jpg",
       items: [
         "Massa cras egestas laoreet montes",
         "dapibus eu sit etiam curabitur",
@@ -41,7 +41,7 @@ const Rooms = () => {
       id: 3,
       room: "Bedroom",
       disc: "Massa cras egestas laoreet montes, dapibus eu sit etiam curabitur faucibus habitasse lectus vestibulum leo, odio dolor quis maecenas faucibus vulputate pharetra.",
-      img: "/src/Assets/rooms/bedroom-img.jpg",
+      img: "rooms/bedroom-img.jpg",
       items: [
         "Massa cras egestas laoreet montes",
         "dapibus eu sit etiam curabitur",
@@ -58,7 +58,7 @@ const Rooms = () => {
       id: 4,
       room: "kitcheen",
       disc: "Massa cras egestas laoreet montes, dapibus eu sit etiam curabitur faucibus habitasse lectus vestibulum leo, odio dolor quis maecenas faucibus vulputate pharetra.",
-      img: "/src/Assets/rooms/kitchen-img.jpg",
+      img: "rooms/kitchen-img.jpg",
       items: [
         "Massa cras egestas laoreet montes",
         "dapibus eu sit etiam curabitur",
@@ -75,7 +75,7 @@ const Rooms = () => {
       id: 5,
       room: "Home Office",
       disc: "Massa cras egestas laoreet montes, dapibus eu sit etiam curabitur faucibus habitasse lectus vestibulum leo, odio dolor quis maecenas faucibus vulputate pharetra.",
-      img: "/src/Assets/rooms/home-office-img.jpg",
+      img: "home-office-img.jpg",
       items: [
         "Massa cras egestas laoreet montes",
         "dapibus eu sit etiam curabitur",
