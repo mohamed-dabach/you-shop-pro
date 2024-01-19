@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../Components/NavBar";
+
 import CardSide from "../Components/CardSide";
 import { useState } from "react";
 import { createStore } from "redux";
 import { reducer } from "../Components/commandReducer"; 
 import { Provider } from "react-redux";
+import Footer from "../Components/footer";
 
 
 
@@ -26,9 +28,11 @@ const Layout = () => {
         <NavBar handleClick={handleClick}/>
         <CardSide toggle={toggle} />
         <h1>Layout</h1>
-        <Outlet />
+        <Outlet /> <Footer/>
     </Provider>
-     
+
+    
+
     </>
   );
 };

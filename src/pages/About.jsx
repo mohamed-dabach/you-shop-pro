@@ -1,5 +1,10 @@
+import SeeLastCol from "../Components/SeeLastCol";
 const About = () => {
-  return <>about</>;
+  return (
+    <>
+      <SeeLastCol />
+    </>
+  );
 };
 
 export default About;
