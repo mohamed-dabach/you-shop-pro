@@ -1,30 +1,29 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./pages/Layout";
 import About from "./pages/about";
-// import Products from "./pages/products";
+
 import Home from "./pages/home";
 import Rooms from "./pages/Rooms";
 import Contact from "./pages/Contact";
 import ProductPageLayout from "./pages/productPageLayout";
 import CategoryPageHeader from "./Components/categoryPageHeader";
+import ProductDetails from "./Components/ProductDetails";
 
 function App() {
+
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="products" element={<ProductPageLayout />}>
+            <Route path="products" element={<ProductPageLayout/>}>
               <Route
                 path="category/:category"
                 element={<CategoryPageHeader />}
               />
             </Route>
-            <Route
-              path="/product/:id"
-              element={<>show details product page</>}
-            />
+              <Route path="/product/:id" element={<>  <ProductDetails /> </>} />
             <Route path="rooms" element={<Rooms />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const ProductList = ({ list }) => {
   return (
-    <ul className="grid grid-cols-2 max-[500px]:grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-4">
+    <ul className="grid grid-cols-2 max-[500px]:grid-cols-1  gap-2 md:grid-cols-3 lg:grid-cols-4">
       {list &&
         list.map((item) => {
           return <ItemProduct key={item.id} product={item} />;
