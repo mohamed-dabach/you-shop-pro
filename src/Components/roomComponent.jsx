@@ -34,8 +34,7 @@ const RoomComponent = ({ room }) => {
   return (
     <div className="bg-semi-white pb-10">
       <div
-        className={`bg-[url("${room.img}")]  bg-cover w-full pt-[100px]  
-        `}
+        className={`bg-[url('rooms/${room.img}')] bg-cover w-full pt-[100px]`}
         id={room.room}
       >
         <div className="container px-10 lg:grid h-full grid-cols-2">

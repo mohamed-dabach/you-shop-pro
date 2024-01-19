@@ -74,7 +74,7 @@ function ProductDetails() {
         <>
             <section className="container mt-10">
                 <div className="p-5 lg:flex block justify-between">
-                    <div className="lg:max-w-[50%] max-w-[100%] p-10">
+                    <div className="lg:max-w-[50%] sm:m-auto max-w-[100%] sm:max-w-[70%] p-2 sm:p-10">
                         <div className="md:p-5">
                             <img className="h-full w-full lg:hover:scale-[1.2] " src={`${details.img}`} alt={`${details.name}`} />
                         </div>
@@ -176,7 +176,7 @@ function ProductDetails() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex md:justify-start ">
+                    <div className="flex md:justify-start mt-10 md:mt-0 ">
                         <div className="md:max-w-[50%] max-w-[100%] px-[50px] py-[100px] border ">
                             <div className="text-center">
                                 <h3 className="font-bold text-semi-black text-[30px] mb-5">Features</h3>
