@@ -6,7 +6,7 @@ export default function Footer() {
     <>
       <footer className="bg-semi-black w-full py-4 flex-col justify-center items-center ">
         <div className="w-full container px-8 flex flex-wrap justify-between py-8">
-          <div className=" w-full md:w-1/3 lg:w-w-4/12 xl:w-4/12  ">
+          <div className=" w-full md:w-1/3 lg:w-4/12 xl:w-4/12  ">
             <ul className="py-4 text-semi-white font-normal ">
               <li className="mb-10">
                 <Link to={"/"}>
