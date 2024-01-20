@@ -137,13 +137,12 @@ export default function CardSide({ toggle }) {
 
         <div
           onClick={CloseCart}
-          className="bg-semi-black bg-opacity-45 absolute top-0 left-0 bottom-0 right-0 h-screen w-full cursor-pointer"
-        >
-          {" "}
+          className="bg-semi-black bg-opacity-60 absolute top-0 left-0 bottom-0 right-0 h-screen w-full cursor-pointer">
+          {/* {" "} */}
         </div>
       </>
     );
   } else {
-    ("");
+    ''
   }
 }
