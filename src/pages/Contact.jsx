@@ -6,7 +6,7 @@ const Contact = () => {
       <div className="">
         <div className="container px-10 mb-10">
           <div className="flex justify-center items-center mb-5  mt-10 flex-col m-auto text-center max-w-[700px]">
-            <h1 className="text-7xl font-semibold my-5 text-semi-black">
+            <h1 className="md:text-7xl text-5xl font-semibold my-5 text-semi-black">
               Contact
             </h1>
             <p className="text-semi-black text-lg mb-10">
@@ -114,6 +114,67 @@ const Contact = () => {
           </div>
         </div>
 
+        <div
+          className="container m-auto px-10 lg:grid grid-cols-[1fr_auto] lg:py-[60px] flex-col md:flex-row
+        "
+        >
+          <div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6944536.185077166!2d-7.172660556250001!3d31.80083464999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cd4778aa113b%3A0xb06c1d84f310fd3!2sCasablanca!5e0!3m2!1sen!2sma!4v1705776487460!5m2!1sen!2sma"
+              className="border-0 w-full h-full min-h-[400px]"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+          <form
+            className="shadow-lg w-full md:min-w-[400px] lg:h-[calc(100%+100px)] lg:translate-y-[-50px]  relative flex flex-col p-6 before:absolute before:top-[-30px] before:left-[-30px] before:z-10 before:content-[''] 
+          before:w-0 before:h-0
+          before:border-primary
+          before:border-[30px]
+          before:border-x-transparent
+          before:border-t-transparent
+          before:rotate-[-45deg]"
+          >
+            <h4 className="text-2xl font-bold text-semi-black mb-3">
+              Send Us A Message
+            </h4>
+            <div className="flex flex-col mt-2">
+              <label htmlFor="name">
+                Name <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="text"
+                id="name"
+                className="border border-semi-black mt-2 px-4 py-1"
+              />
+            </div>
+            <div className="flex flex-col mt-2">
+              <label htmlFor="email">
+                Email <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="border border-semi-black mt-2 px-4 py-1"
+              />
+            </div>
+            <div className="flex flex-col mt-2">
+              <label htmlFor="massege">
+                Massege <span className="text-red-600">*</span>
+              </label>
+              <textarea
+                cols="10"
+                className="border border-semi-black mt-2"
+                id="massege"
+                rows="4"
+              ></textarea>
+            </div>
+            <button className="px-6 py-2 bg-primary text-semi-black w-fit uppercase mt-3 ">
+              Submit
+            </button>
+          </form>
+        </div>
         <SeeLastCol />
       </div>
     </>
@@ -167,7 +228,6 @@ const Social = () => {
       <Link className=" group uppercase px-3 py-1  ms-5 flex items-center gap-3 font-bold border-2 border-transparent hover:border-primary hover:text-primary group-hover:fill-primary ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-       
           viewBox="0 0 24 24"
           stroke=""
           className="w-5 h-5 group-hover:stroke-primary  group-hover:fill-primary inline-block rotate-[-45deg] hover:fill-primary "
