@@ -3,8 +3,8 @@ import NavBar from "../Components/NavBar";
 import CardSide from "../Components/CardSide";
 import { useState } from "react";
 import { createStore } from "redux";
-import { reducer } from "../Components/commandReducer"; 
 import { Provider } from "react-redux";
+import { reducer } from "../reducers/commandReducer";
 
 
 
