@@ -34,13 +34,24 @@ const RoomComponent = ({ room }) => {
   return (
     <div className="bg-semi-white pb-10">
       <div
-        style={{ "--bg-img": `url(/rooms/${room.img})` }}
-        className={`bg-[image:var(--bg-img)] bg-cover w-full pt-[100px]`}
+        className={`bg-[url('rooms/${room.img}')] bg-cover w-full pt-[100px]`}
         id={room.room}
       >
         <div className="container px-10 lg:grid h-full grid-cols-2">
           <div
-            className="bg-white relative h-full col-start-2  before:absolute before:top-[-30px] before:left-[-30px] before:z-10 before:content-['']  before:w-0 before:h-0 before:border-primary before:border-[30px] before:border-x-transparent before:border-t-transparent before:rotate-[-45deg] pt-16 pe-2 sm:ps-10 ps-2 text-lg
+            className="bg-white relative h-full col-start-2 
+          before:absolute before:top-[-30px] before:left-[-30px] before:z-10 before:content-[''] 
+          before:w-0 before:h-0
+          before:border-primary
+          before:border-[30px]
+          before:border-x-transparent
+          before:border-t-transparent
+          before:rotate-[-45deg]
+          pt-16
+          pe-2
+          sm:ps-10
+          ps-2
+          text-lg
           "
           >
             <h5 className="text-2xl font-bold mb-3">{room.room}</h5>

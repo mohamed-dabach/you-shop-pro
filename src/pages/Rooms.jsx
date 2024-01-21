@@ -1,11 +1,12 @@
 import RoomComponent from "../Components/roomComponent";
-import SeeLastCol from "../Components/SeeLastCol";
+import SeeLastCol from "../Components/SeeLastCol"
 const Rooms = () => {
+
   const rooms = [
     {
       id: 1,
       room: "Living Room",
-      img: "living-room-img.jpg",
+      img: "rooms/living-room-img.jpg",
       disc: "Massa cras egestas laoreet montes, dapibus eu sit etiam curabitur faucibus habitasse lectus vestibulum leo, odio dolor quis maecenas faucibus vulputate pharetra.",
       items: [
         "Massa cras egestas laoreet montes",
@@ -23,7 +24,7 @@ const Rooms = () => {
       id: 2,
       room: "Beth room",
       disc: "Massa cras egestas laoreet montes, dapibus eu sit etiam curabitur faucibus habitasse lectus vestibulum leo, odio dolor quis maecenas faucibus vulputate pharetra.",
-      img: "bath-room-img.jpg",
+      img: "rooms/bath-room-img.jpg",
       items: [
         "Massa cras egestas laoreet montes",
         "dapibus eu sit etiam curabitur",
@@ -40,7 +41,7 @@ const Rooms = () => {
       id: 3,
       room: "Bedroom",
       disc: "Massa cras egestas laoreet montes, dapibus eu sit etiam curabitur faucibus habitasse lectus vestibulum leo, odio dolor quis maecenas faucibus vulputate pharetra.",
-      img: "bedroom-img.jpg",
+      img: "rooms/bedroom-img.jpg",
       items: [
         "Massa cras egestas laoreet montes",
         "dapibus eu sit etiam curabitur",
@@ -57,7 +58,7 @@ const Rooms = () => {
       id: 4,
       room: "kitcheen",
       disc: "Massa cras egestas laoreet montes, dapibus eu sit etiam curabitur faucibus habitasse lectus vestibulum leo, odio dolor quis maecenas faucibus vulputate pharetra.",
-      img: "kitchen-img.jpg",
+      img: "rooms/kitchen-img.jpg",
       items: [
         "Massa cras egestas laoreet montes",
         "dapibus eu sit etiam curabitur",
@@ -109,6 +110,7 @@ const Rooms = () => {
       <SeeLastCol />
     </div>
   );
+
 };
 
 export default Rooms;
