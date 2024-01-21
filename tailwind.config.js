@@ -4,6 +4,17 @@ export default {
 
   theme: {
     extend: {
+      extend: {
+        fill: (theme) => ({
+          primary: theme("colors.primary"),
+        }),
+      },
+
+      variants: {
+        extend: {
+          fill: ["group-hover"],
+        },
+      },
       colors: {
         // custom colors
         primary: "#edb932",
