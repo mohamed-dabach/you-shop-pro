@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 // give it array of products check /data/db.json
 
-const ProductList = ({ list }) => {
+export default function ProductList({ list }){
+
   return (
     <ul className="grid grid-cols-2 max-[500px]:grid-cols-1  gap-2 md:grid-cols-3 lg:grid-cols-4">
       {list &&
@@ -16,7 +17,7 @@ const ProductList = ({ list }) => {
 
 const ItemProduct = ({ product }) => {
   return (
-    <li className="p-1 border text-center">
+    <li className="p-2 border text-center hover:shadow-xl hover:duration-700">
       <Link to={`/product/${product.id}`}>
         <img
           src={product.img}
@@ -57,4 +58,3 @@ ProductList.propTypes = {
   ),
 };
 
-export default ProductList;
