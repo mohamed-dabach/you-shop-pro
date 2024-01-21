@@ -1,17 +1,37 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import logo from "../Assets/kayuu-Logo-dark.svg";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import darklogo from "../Assets/kayuu-Logo-dark.svg";
+import whitelogo from "../Assets/kayuu-Logo-white.svg";
+import PropTypes from "prop-types";
+import NavLinkItem from "./navLinkItem";
 
 const NavBar = ({ handleClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const [url, setUrl] = useState(location.pathname);
+  const [isTrensparent, setIsTransparent] = useState(false);
+  useEffect(() => {
+    setUrl(location.pathname);
+    if (url === "/") {
+      setIsTransparent(true);
+    } else {
+      setIsTransparent(false);
+    }
+  }, [location, url]);
 
   return (
     <>
-      <nav className=" p-3 px-10 shadow-lg bg-white">
-        <div className="container mx-auto flex max-w-[1440px] flex-col md:flex-row justify-start relative md:justify-between ">
+      <nav
+        className={`py-5 px-10 shadow-lg ${
+          isTrensparent
+            ? "bg-transparent absolute z-[999] top-0 left-0 w-full"
+            : "bg-white "
+        }`}
+      >
+        <div className="container  mx-auto flex max-w-[1440px] flex-col md:flex-row justify-start relative md:justify-between ">
           <Link to={"/"} className="text-black w-fit font-bold flex ">
             <img
-              src={logo}
+              src={isTrensparent ? whitelogo : darklogo}
               alt="Logo"
               className="h-6 w-auto inline-block mr-2 "
             />
@@ -44,60 +64,48 @@ const NavBar = ({ handleClick }) => {
             }`}
           >
             <li>
-              <Link
-                to={"/"}
-                className="text-black no-underline hover:text-primary"
-              >
+              <NavLinkItem to={"/"} isDark={isTrensparent}>
                 Home
-              </Link>
+              </NavLinkItem>
             </li>
             <li>
-              <Link
-                to={"/products"}
-                className="text-black no-underline hover:text-primary"
-              >
+              <NavLinkItem to={"/products"} isDark={isTrensparent}>
                 Products
-              </Link>
+              </NavLinkItem>
             </li>
             <li>
-              <Link
-                to={"/rooms"}
-                className="text-black no-underline hover:text-primary"
-              >
+              <NavLinkItem to={"/rooms"} isDark={isTrensparent}>
                 Rooms
-              </Link>
+              </NavLinkItem>
             </li>
             <li>
-              <Link
-                to={"/about"}
-                className="text-black no-underline hover:text-primary"
-              >
+              <NavLinkItem to={"/about"} isDark={isTrensparent}>
                 About Us
-              </Link>
+              </NavLinkItem>
             </li>
             <li>
-              <Link
-                to={"/contact"}
-                className="text-black no-underline hover:text-primary"
-              >
+              <NavLinkItem to={"/contact"} isDark={isTrensparent}>
                 Contact Us
-              </Link>
+              </NavLinkItem>
             </li>
             <li className="ms-3">
               <button
                 onClick={handleClick}
                 className="hidden  text-primary relative hover:text-gray-300 md:flex items-center"
               >
-                <div className="absolute text-semi-black font-semibold top-[-5px] left-[-10px] bg-primary flex justify-center items-center p-0 m-0 w-5 h-5 text-[12px] rounded-2xl">
+                <div
+                  className={`absolute  font-semibold top-[-5px] left-[-10px] flex justify-center items-center p-0 m-0 w-5 h-5 text-[12px] rounded-2xl 
+                  text-semi-black bg-primary`}
+                >
                   22
                 </div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6 "
+                  className={`w-6 h-6 fill-none ${
+                    isTrensparent ? " stroke-primary" : "stroke-primary"
+                  }`}
                 >
                   <path
                     strokeLinecap="round"
@@ -112,6 +120,11 @@ const NavBar = ({ handleClick }) => {
       </nav>
     </>
   );
+};
+
+// props validation
+NavBar.propTypes = {
+  handleClick: PropTypes.func,
 };
 
 export default NavBar;
