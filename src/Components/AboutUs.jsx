@@ -36,7 +36,7 @@ function AboutUs() {
                             boxShadow: "16px 24px 80px -16px rgba(0, 0, 0, 0.4)",
                         }}
                             loading="lazy"
-                            src="/public/furniture-store-about-product-img.jpg"
+                            src="/furniture-store-about-product-img.jpg"
                             alt="about-img" />
                     </div>
                     <div className="md:max-w-[50%] max-w-[100%] ">
@@ -104,7 +104,7 @@ function AboutUs() {
                             <p className="text-semi-black">Aliquet magna malesuada diam nunc quis duis id nunc id ultrices cursus lorem consequat tincidunt pharetra, risus quam facilisis lectus ipsum ut mattis pretium eros tincidunt neque, faucibus volutpat accumsan pretium arcu in donec et, rhoncus in sed eleifend odio gravida vitae quam donec faucibus molestie bibendum.</p>
                         </div>
                     </div>
-                    <div className="md:flex block p-10">
+                    <div className="md:flex block p-2 md:p-10">
                         <div className="md:min-w-[50%] min-w-[100%] p-2">
                             <h1 className="font-bold text-[48px] px-5 mb-5">The Best Quality Furniture Store in Town</h1>
                             <p className="px-5 mb-5">Sagittis enim, auctor ultrices dui etiam viverra nulla scelerisque in semper porttitor pharetra, tortor amet lorem cursus velit posuere tristique tempus, tincidunt non velit quis congue lectus a ullamcorper iaculis.</p>
@@ -140,8 +140,9 @@ function AboutUs() {
                         </div>
                         <div className="md:min-w-[50%] min-w-[100%] ">
                             <img className="w-full h-full"
+                                loading="lazy"
                                 style={{ boxShadow: "rgba(0, 0, 0, 0.4) 6px 8px 32px -16px" }}
-                                src="/public/about-last-img.jpg"
+                                src="/about-last-img.jpg"
                                 alt="last-img-about" />
                         </div>
                     </div>
