@@ -18,7 +18,7 @@ const NavBar = ({ handleClick }) => {
       setIsTransparent(false);
     }
   }, [location, url]);
-
+  //   console.log(url);
   return (
     <>
       <nav
