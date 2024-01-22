@@ -21,7 +21,9 @@ export default function CardSide({ toggle }) {
   if (isToggle) {
     return (
       <>
-        <div className="bg-white z-10 shadow-md h-screen w-full lg:w-5/12 xl:w-5/12 md:w-8/12 fixed top-0 right-0">
+
+        <div className="bg-white z-[999999] shadow-md h-screen w-full lg:w-5/12 xl:w-5/12 md:w-8/12 fixed top-0 right-0">
+
           <div className="w-full h-16 flex justify-between items-center px-6 border-b">
             <div className="text-semi-black font-medium">Shopping Cart</div>
 
@@ -148,14 +150,15 @@ export default function CardSide({ toggle }) {
 
         <div
           onClick={CloseCart}
-          className="bg-semi-black bg-opacity-45 absolute top-0 left-0 bottom-0 right-0 h-screen w-full cursor-pointer"
+
+          className="bg-semi-black bg-opacity-45 fixed z-[999998] top-0 left-0 bottom-0 right-0 h-screen w-full cursor-pointer"
         >
-          {" "}
+      
         </div>
       </>
     );
   } else {
-    ("");
+    ''
   }
 }
 

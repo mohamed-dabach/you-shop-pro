@@ -2,8 +2,12 @@ import { Outlet } from "react-router-dom";
 import ProductList from "../Components/ProductList";
 import SideProductFilters from "../Components/SideProductFilter";
 import { useState } from "react";
-const Products = () => {
+import NewCollection from "../Components/NewCollection";
+
+export default function Products() {
+
   const [showFilters, setShowFilters] = useState(false);
+
   const list = [
     {
       id: 1928,
@@ -90,6 +94,10 @@ const Products = () => {
       category: "Bedroom",
     },
   ];
+
+ 
+
+
   function handleToggleFilters() {
     setShowFilters((prev) => !prev);
   }
@@ -140,4 +148,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+
