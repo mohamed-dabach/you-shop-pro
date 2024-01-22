@@ -5,8 +5,8 @@ import CardSide from "../Components/CardSide";
 import { useState } from "react";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-
-
+import { reducer } from "../reducers/commandReducer";
+import Footer from "../Components/footer";
 
 const Layout = () => {
 
@@ -26,7 +26,8 @@ const Layout = () => {
         <NavBar handleClick={handleClick}/>
         <CardSide toggle={toggle} />
         <h1>Layout</h1>
-        <Outlet /> <Footer/>
+        <Outlet />
+        <Footer/>
     </Provider>
 
     
