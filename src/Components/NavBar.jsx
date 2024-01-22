@@ -113,10 +113,12 @@ const NavBar = ({ handleClick }) => {
                 />
               </svg>
             </button>
-          </div>
-        </div>
-      </nav>
-    </>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    </> 
+
   );
 };
 
