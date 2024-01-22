@@ -18,6 +18,7 @@ const NavBar = ({ handleClick }) => {
       setIsTransparent(false);
     }
   }, [location, url]);
+
   //   console.log(url);
   return (
     <>
@@ -42,6 +43,7 @@ const NavBar = ({ handleClick }) => {
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className={`text-primary focus:outline-none`}
+
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -113,10 +115,12 @@ const NavBar = ({ handleClick }) => {
                 />
               </svg>
             </button>
-          </div>
-        </div>
-      </nav>
-    </>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    </> 
+
   );
 };
 
