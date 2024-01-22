@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../Components/NavBar";
+
 import CardSide from "../Components/CardSide";
 import { useState } from "react";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import { reducer } from "../reducers/commandReducer";
 
 
 
@@ -26,9 +26,11 @@ const Layout = () => {
         <NavBar handleClick={handleClick}/>
         <CardSide toggle={toggle} />
         <h1>Layout</h1>
-        <Outlet />
+        <Outlet /> <Footer/>
     </Provider>
-     
+
+    
+
     </>
   );
 };
