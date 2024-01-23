@@ -8,6 +8,7 @@ import Contact from "./pages/Contact";
 import ProductPageLayout from "./pages/productPageLayout";
 import CategoryPageHeader from "./Components/categoryPageHeader";
 import ProductDetails from "./Components/ProductDetails";
+import ViewCarT from "./Components/View_CarT";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="rooms" element={<Rooms />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="ViewCarT" element={<ViewCarT/>} />
             <Route path="*" element={<>check your link 404 route</>} />
           </Route>
         </Routes>

@@ -1,7 +1,7 @@
 const initialValue = {
   orders: [
-    { id: 123, title: "abdo gey product", price: 50, count: 3 },
-    { id: 122, title: "abdo product gey ", price: 100, count: 1 },
+    { id: 123, title: "wooden stool", price: 50, count: 3 },
+    { id: 122, title: "green bedroom swof ", price: 100, count: 1 },
   ],
 };
 
