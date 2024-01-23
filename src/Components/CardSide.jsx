@@ -131,7 +131,7 @@ export default function CardSide({ toggle }) {
                 </div>
                 <div className="  absolute left-5 bottom-4 right-5 flex flex-col justify-center items-center">
                   <button className="w-full mb-4 bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
-                    <Link to={"/"}>VIEW CART</Link>
+                    <Link to={"ViewCarT"}>VIEW CART</Link>
                   </button>
                   <button className="w-full bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
                     <Link to={"/"}></Link>CHECKOUT
