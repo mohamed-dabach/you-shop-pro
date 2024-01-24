@@ -14,7 +14,7 @@ export default function ViewCarT(){
             
             <div className=' flex flex-wrap justify-between'>
                   
-           <div className=' w-full lg:w-8/12 xl:w-8/12 md:w-8/12  '>
+           <div className=' w-full lg:w-8/12 xl:w-8/12 md:w-full  '>
            {orders ?
             <div className='w-full lg:flex xl:flex hidden lg:justify-center xl:justify-between bg-gray-100 p-4'>
             <div className='w-4/12 text-[1.2rem] font-medium'>Product</div>
@@ -48,7 +48,7 @@ export default function ViewCarT(){
                                       </div> 
                                       {/* this img just for respo */}
                                   </div>
-                                  <div className=' py-3 w-full flex-none lg:flex xl:flex md:flex justify-between  '>
+                                  <div className='py-3 w-full flex-none lg:flex xl:flex md:flex-none justify-between  '>
                                         <div className='border-b w-full lg:w-4/12 xl:w-4/12 flex lg:flex xl:flex md:flex justify-between p-3'>
                                             <div className='flex lg:hidden xl:hidden font-medium '> Product:</div>
                                             <div className='hidden lg:flex xl:flex ' ><img src="#" alt="img" /></div> 
@@ -58,7 +58,7 @@ export default function ViewCarT(){
                                             <div className='flex lg:hidden xl:hidden font-medium'>price:</div>
                                             <div>DH {order.price}</div>
                                         </div>
-                                        <div className='  border-b w-full xl:w-3/12 lg:w-3/12 flex justify-between p-2'>
+                                        <div className='border-b w-full xl:w-3/12 lg:w-3/12 flex justify-between p-2'>
                                            <div className='flex lg:hidden xl:hidden w-3/12 font-medium'>Quantity:</div>
                                             <div className=' flex  lg:justify-start xl:justify-start justify-end w-4/12 xl:w-8/12 lg:w-8/12'>
                                                 <button 
@@ -68,8 +68,8 @@ export default function ViewCarT(){
                                                       payload: { id: order.id, type: "dec" },
                                                     });
                                                   }}
-                                                 className='border bg-gray-100  w-4/12 px-6 py-1 lg:px-4 lg:py-1 xl:px-4 xl:py-1'>-</button>
-                                                <button className=' w-3/12 px-4 py-2'>{order.count}</button>
+                                                 className='border bg-gray-100  p-4'>-</button>
+                                                <button className='  px-4 py-2'>{order.count}</button>
                                                 <button
                                                 onClick={()=>{
                                                     dispatch({
@@ -77,7 +77,7 @@ export default function ViewCarT(){
                                                         payload: {id:order.id, type:"inc"}
                                                     })
                                                 }}
-                                                 className='border bg-gray-100 w-4/12 px-6 py-1 lg:px-4 lg:py-1 xl:px-4 xl:py-1'>+</button>
+                                                 className='border bg-gray-100  px-4'>+</button>
                                             </div>
                                         </div>
                                         <div className=' border-b w-full xl:w-2/12 lg:w-2/12 flex justify-between p-3'>
@@ -119,7 +119,7 @@ export default function ViewCarT(){
                 
             </div>
              {orders ?
-                    <div className='  w-full lg:w-4/12 xl:w-4/12 md:w-4/12 ms-0 lg:ps-6 xl:ps-6 md:ps-6 mt-7 xl:mt-0 lg:mt-0 md:mt-0'>
+                    <div className='  w-full lg:w-4/12 xl:w-4/12 md:w-full ms-0 lg:ps-6 xl:ps-6 md:ps-6 mt-7 xl:mt-0 lg:mt-0 md:mt-0'>
                     <div className='border  '>
                        <div className='bg-gray-100 p-4'>
                          <h1 className='font-bold text-[1.4rem] text-black tracking-wide'>Cart totals</h1>
