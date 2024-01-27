@@ -1,100 +1,111 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import logo from "../Assets/kayuu-Logo-dark.svg";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import darklogo from "../Assets/kayuu-Logo-dark.svg";
+import whitelogo from "../Assets/kayuu-Logo-white.svg";
+import PropTypes from "prop-types";
+import NavLinkItem from "./navLinkItem";
 
-const NavBar = () => {
+const NavBar = ({ handleClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const [url, setUrl] = useState(location.pathname);
+  const [isTrensparent, setIsTransparent] = useState(false);
+  useEffect(() => {
+    setUrl(location.pathname);
+    if (url === "/") {
+      setIsTransparent(true);
+    } else {
+      setIsTransparent(false);
+    }
+  }, [location, url]);
+  //   console.log(url);
   return (
-    <nav className=" p-3 px-10 shadow-lg bg-white">
-      <div className="container mx-auto flex max-w-[1440px] flex-col md:flex-row justify-start relative md:justify-between ">
-        <Link to={"/"} className="text-black w-fit font-bold flex ">
-          <img
-            src={logo}
-            alt="Logo"
-            className="h-6 w-auto inline-block mr-2 "
-          />
-        </Link>
-
-        <div className="md:hidden absolute right-0">
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className={`text-black focus:outline-none`}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-auto h-6 mr-8 transition-transform duration-300"
+    <>
+      <nav
+        className={`py-5 px-10 shadow-lg  ${
+          isTrensparent
+            ? menuOpen
+              ? "bg-semi-black relative  z-[999] top-0 left-0 w-full"
+              : "bg-transparent absolute z-[999] top-0 left-0 w-full"
+            : "bg-white "
+        }`}
+      >
+        <div className="container  mx-auto flex max-w-[1440px] flex-col md:flex-row justify-start relative md:justify-between ">
+          <Link to={"/"} className="text-black w-fit font-bold flex ">
+            <img
+              src={isTrensparent ? whitelogo : darklogo}
+              alt="Logo"
+              className="h-6 w-auto inline-block mr-2 "
+            />
+          </Link>
+          <div className="md:hidden absolute right-0">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className={`text-primary focus:outline-none`}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
-          </button>
-        </div>
-        <ul
-          className={` mx-4 mt-3 md:flex  md:m-0 md:items-center gap-3 flex-col md:flex-row ${
-            menuOpen ? "" : "hidden"
-          }`}
-        >
-          <li>
-            <Link
-              to={"/"}
-              className="text-black no-underline hover:text-primary"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={"/products"}
-              className="text-black no-underline hover:text-primary"
-            >
-              Products
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={"/rooms"}
-              className="text-black no-underline hover:text-primary"
-            >
-              Rooms
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={"/about"}
-              className="text-black no-underline hover:text-primary"
-            >
-              About Us
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={"/contact"}
-              className="text-black no-underline hover:text-primary"
-            >
-              Contact Us
-            </Link>
-          </li>
-          <li className="ms-3">
-            <button className="hidden  text-primary relative hover:text-gray-300 md:flex items-center">
-              <div className="absolute text-semi-black font-semibold top-[-5px] left-[-10px] bg-primary flex justify-center items-center p-0 m-0 w-5 h-5 text-[12px] rounded-2xl">
-                22
-              </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 "
+                className="w-auto h-6 stroke-primary  transition-transform duration-300"
               >
-                
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+            </button>
+          </div>
+          <ul
+            className={` mx-4 mt-3 md:flex   md:m-0 md:items-center gap-3 flex-col md:flex-row ${
+              menuOpen ? "" : "hidden"
+            }`}
+          >
+            <li>
+              <NavLinkItem to={"/"} isDark={isTrensparent}>
+                Home
+              </NavLinkItem>
+            </li>
+            <li>
+              <NavLinkItem to={"/products"} isDark={isTrensparent}>
+                Products
+              </NavLinkItem>
+            </li>
+            <li>
+              <NavLinkItem to={"/rooms"} isDark={isTrensparent}>
+                Rooms
+              </NavLinkItem>
+            </li>
+            <li>
+              <NavLinkItem to={"/about"} isDark={isTrensparent}>
+                About Us
+              </NavLinkItem>
+            </li>
+            <li>
+              <NavLinkItem to={"/contact"} isDark={isTrensparent}>
+                Contact Us
+              </NavLinkItem>
+            </li>
+          </ul>
+          <div className="absolute right-20 md:relative md:right-0 ">
+            <button
+              onClick={handleClick}
+              className="  text-primary  relative hover:text-gray-300 md:flex items-center"
+            >
+              <div
+                className={`absolute  font-semibold top-[-5px] left-[-10px] flex justify-center items-center p-0 m-0 w-5 h-5 text-[12px] rounded-2xl 
+                  text-semi-black bg-primary`}
+              >
+                22
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                className={`w-6 h-6 fill-none stroke-primary`}
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -102,11 +113,16 @@ const NavBar = () => {
                 />
               </svg>
             </button>
-          </li>
-        </ul>
-      </div>
-    </nav>
+          </div>
+        </div>
+      </nav>
+    </>
   );
+};
+
+// props validation
+NavBar.propTypes = {
+  handleClick: PropTypes.func,
 };
 
 export default NavBar;
