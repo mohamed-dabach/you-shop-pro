@@ -29,7 +29,11 @@ const cardRedcure = (state = initialValue, action) => {
           if (action.payload.type === "inc") {
             return { ...order, quantity: ++order.quantity };
           } else if (action.payload.type === "dec") {
-            return { ...order, quantity: --order.quantity };
+            return {
+              ...order,
+              // if the quantity is 1 then it will not be decremented
+              quantity: order.quantity <= 1 ? 1 : --order.quantity,
+            };
           }
         } else {
           return order;

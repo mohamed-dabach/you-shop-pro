@@ -52,7 +52,6 @@ export default function CardSide() {
             </span>
           )}
         </div>
-
         {cardOrders.length > 0 ? (
           <div>
             <div className="absolute bottom-36 w-full py-4 px-5 flex justify-between border-t border-b">
@@ -61,12 +60,18 @@ export default function CardSide() {
               <span className="font-medium text-semi-gray">MAD {total()}</span>
             </div>
             <div className="  absolute left-5 bottom-4 right-5 flex flex-col justify-center items-center">
-              <button className="w-full mb-4 bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
-                <Link to={"ViewCarT"}>VIEW CART</Link>
-              </button>
-              <button className="w-full bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
-                <Link to={"/"}></Link>CHECKOUT
-              </button>
+              <Link
+                to={"ViewCarT"}
+                className="w-full mb-4 bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1"
+              >
+                VIEW CART
+              </Link>
+              <Link
+                to={"/checkout"}
+                className="w-full bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1"
+              >
+                CHECKOUT
+              </Link>
             </div>
           </div>
         ) : (
@@ -98,7 +103,9 @@ const CardItem = ({ order }) => {
 
       <div className="w-10/12 flex flex-col justify-between items-center">
         <div className=" w-full px-2 flex justify-between mb-2">
-          <div className="font-bold text-gray-700">{order.title}</div>
+          <Link to={`/product/${order.id}`} className="font-bold text-gray-700">
+            {order.title}
+          </Link>
           <div
             onClick={() => {
               dispatch(deleteOrder({ id: order.id }));
@@ -109,8 +116,7 @@ const CardItem = ({ order }) => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="gray"
-              className="w-6 h-6"
+              className="w-6 h-6 stroke-red-500"
             >
               <path d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
