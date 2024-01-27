@@ -1,32 +1,24 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../Components/NavBar";
 import CardSide from "../Components/CardSide";
-import { useState } from "react";
-import { createStore } from "redux";
-
-import { Provider } from "react-redux";
-import { reducer } from "../reducers/commandReducer";
+import { useDispatch, useSelector } from "react-redux";
 import Footer from "../Components/footer";
+import { toggleCard } from "../redux/reducers/cardReducer";
 
 const Layout = () => {
-  const [toggle, setToggle] = useState(false);
+  const dispatch = useDispatch();
+  const showSideCard = useSelector((state) => state.showCard);
 
   const handleClick = () => {
-    setToggle((prevState) => !prevState);
-    console.log(toggle);
+    dispatch(toggleCard());
   };
-
-  const store = createStore(reducer);
 
   return (
     <>
-      <Provider store={store}>
-        <NavBar handleClick={handleClick} />
-        <CardSide toggle={toggle} />
-        <Outlet />
-        <Footer />
-      </Provider>
-
+      <NavBar handleClick={handleClick} />
+      {showSideCard && <CardSide />}
+      <Outlet />
+      <Footer />
     </>
   );
 };
