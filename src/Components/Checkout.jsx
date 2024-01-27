@@ -1,9 +1,7 @@
-import logo from "../Assets/kayuu-logo-dark.svg";
-
 function Checkout() {
   return (
-    <>
-      <div className="bg-gray-50 lg:px-40 lg:py-8 lg:pb-20 px-8 py-8">
+    <div>
+      <div className="bg-gray-50 container lg:px-40 lg:py-8 lg:pb-20 px-8 py-8">
         <div className="bg-white  lg:grid grid-cols-2  ">
           <div className="  col-span-1 ">
             <div className="p-8  ">
@@ -130,7 +128,7 @@ function Checkout() {
           </div>
           <div className="p-8 pb-16 ">
             <h3 className="pb-16">Payment</h3>
-            <button className="flex items-center bg-primary px-48 py-2 text-black hover:text-white">
+            <button className="flex items-center justify-center bg-primary  w-full   px-10 py-2 text-black hover:text-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -156,7 +154,7 @@ function Checkout() {
           Powered by Online Furniture Store
         </div>
       </footer>
-    </>
+    </div>
   );
 }
 export default Checkout;
