@@ -2,18 +2,13 @@ import Slider from "@mui/material/Slider";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const SideProductFilters = ({ handleToggleFilters }) => {
   const [maxMinPrice, setMaxMinPrice] = useState([20, 37]);
   function handleFilterByPrice() {}
 
-  const categories = [
-    { category: "Bathroom", count: 4 },
-    { category: "Living Room", count: 7 },
-    { category: "Bedroom", count: 2 },
-    { category: "Cabinet", count: 4 },
-    { category: "Kitchen", count: 49 },
-  ];
+  const categories = useSelector(state=>state.categories)
 
   return (
     <>

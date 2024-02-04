@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // give it array of products check /data/db.json
 
-export default function ProductList({ list }){
+export default function ProductList({ list }) {
 
   return (
     <ul className="grid grid-cols-2 max-[500px]:grid-cols-1  gap-2 md:grid-cols-3 lg:grid-cols-4">

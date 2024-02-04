@@ -1,37 +1,13 @@
 import { Link } from "react-router-dom";
 import ProductList from "./ProductList";
+import { useSelector } from "react-redux";
 export default function NewCollection() {
-  const ListProducts = [
-    {
-      id: 9735,
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/cream-ceramic-oval-bathtub-300x300.png",
-      name: "Ceramic Oval Bathtub",
-      price: "11,200.00",
-      category: "Bathroom",
-    },
-    {
-      id: 9947,
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/bathroom-wooden-table-300x300.png",
-      name: "Bathroom Wooden Table",
-      price: "550.00",
-      category: "Bathroom",
-    },
-    {
-      id: 7098,
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/living-room-green-sofa-300x300.png",
-      name: "Green Living Room Sofa",
-      price: "1,840.00",
-      category: "Living Room",
-    },
-    {
-      id: 1022,
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/single-blue-fabric-chair-1-300x300.png",
-      name: "Blue Comfy Fabric Chair",
-      price: "580.50",
-      category: "Bedroom",
-    },
+  const ListProducts = useSelector(state => state.products)
+  const produits = [
+    ...ListProducts
   ];
-
+  const produitsMelanges = produits.sort(() => Math.random() - 0.5);
+  const quatreElementsAleatoires = produitsMelanges.slice(0, 4);
   return (
     <>
       <div className="w-full lg:w-full xl:w-12/12 md:w-12/12 flex flex-wrap justify-between px-8 py-20">
@@ -73,11 +49,9 @@ export default function NewCollection() {
           </div>
         </div>
       </div>
-
       <div className="px-8 py-6">
-        <ProductList list={ListProducts} />
+        <ProductList list={quatreElementsAleatoires} />
       </div>
-
       <div className=" w-full h-auto flex flex-wrap justify-between my-24 ">
         <div className="w-full lg:w-3/12 xl:w-3/12 md:w-6/12 h-[82vh] relative">
           <img

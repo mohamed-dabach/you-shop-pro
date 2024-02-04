@@ -10,7 +10,6 @@ const CountdownTimer = ({ val }) => {
         setCount((prevCount) => prevCount + 1);
       }
     }, val.duration);
-
     return () => clearInterval(interval);
   }, [count, val]);
 
@@ -149,8 +148,8 @@ function AboutUs() {
               </p>
             </div>
           </div>
-          <div className="md:flex block p-2 md:p-10">
-            <div className="md:min-w-[50%] min-w-[100%] p-2">
+          <div className="lg:flex block p-2 md:p-10">
+            <div className="lg:min-w-[50%] min-w-[100%] p-2">
               <h1 className="font-bold text-[48px] px-5 mb-5">
                 The Best Quality Furniture Store in Town
               </h1>
@@ -223,9 +222,9 @@ function AboutUs() {
                 </div>
               </div>
             </div>
-            <div className="md:min-w-[50%] min-w-[100%] ">
+            <div className="lg:min-w-[50%] min-w-[100%] ">
               <img
-                className="w-full h-full object-cover"
+                className="w-full h-full"
                 loading="lazy"
                 style={{ boxShadow: "rgba(0, 0, 0, 0.4) 6px 8px 32px -16px" }}
                 src="/about-last-img.jpg"

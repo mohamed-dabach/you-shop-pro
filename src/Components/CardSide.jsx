@@ -5,11 +5,7 @@ import { Link } from "react-router-dom";
 export default function CardSide({ toggle }) {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders);
-
-  console.log(orders);
-
   const [isToggle, setIsToggle] = useState();
-
   useEffect(() => {
     setIsToggle(toggle);
   }, [toggle]);
@@ -51,7 +47,7 @@ export default function CardSide({ toggle }) {
                     >
                       <div className="w-2/12 h-20 flex justify-center items-center bg-slate-100 mr-1">
                         {/* product's img */}
-                        <img src="" alt="img" />
+                        <img src={order.img} alt="img" />
                       </div>
 
                       <div className="w-10/12 flex flex-col justify-between items-center">
@@ -61,9 +57,6 @@ export default function CardSide({ toggle }) {
                             {order.title}
                           </div>
                           <div
-                            // onClick={() => {
-                            //   dispatch();
-                            // }}
                             className="cursor-pointer"
                           >
                             <svg
@@ -115,29 +108,29 @@ export default function CardSide({ toggle }) {
                     </div>
                   );
                 })
-              :
-               <span className="text-gray-400 font-medium absolute left-32 top-52 ">No products in the cart</span>
+                :
+                <span className="text-gray-400 font-medium absolute left-32 top-52 ">No products in the cart</span>
             }
           </div>
 
-     {orders && orders.length > 0 ?
+          {orders && orders.length > 0 ?
             orders.map((order) => {
               return (
                 <div>
-                <div className="absolute bottom-36 w-full py-4 px-5 flex justify-between border-t border-b">
-                  {/* here will be a state that calculats the total price of all products the client ordered */}
-                  <span className="font-bold text-gray-600">Subtotal:</span>
-                  <span className="font-medium text-semi-gray">MAD 231</span>
+                  <div className="absolute bottom-36 w-full py-4 px-5 flex justify-between border-t border-b">
+                    {/* here will be a state that calculats the total price of all products the client ordered */}
+                    <span className="font-bold text-gray-600">Subtotal:</span>
+                    <span className="font-medium text-semi-gray">MAD 231</span>
+                  </div>
+                  <div className="  absolute left-5 bottom-4 right-5 flex flex-col justify-center items-center">
+                    <button className="w-full mb-4 bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
+                      <Link to={"/"}>VIEW CART</Link>
+                    </button>
+                    <button className="w-full bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
+                      <Link to={"/"}></Link>CHECKOUT
+                    </button>
+                  </div>
                 </div>
-                <div className="  absolute left-5 bottom-4 right-5 flex flex-col justify-center items-center">
-                  <button className="w-full mb-4 bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
-                    <Link to={"/"}>VIEW CART</Link>
-                  </button>
-                  <button className="w-full bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
-                    <Link to={"/"}></Link>CHECKOUT
-                  </button>
-                </div>
-              </div>
               );
             })
             :
@@ -145,7 +138,7 @@ export default function CardSide({ toggle }) {
               <Link to={"/products"}>CONTINUE SHOPPING</Link>
             </button>
           }
-        
+
         </div>
 
         <div
@@ -153,7 +146,7 @@ export default function CardSide({ toggle }) {
 
           className="bg-semi-black bg-opacity-45 fixed z-[999998] top-0 left-0 bottom-0 right-0 h-screen w-full cursor-pointer"
         >
-      
+
         </div>
       </>
     );
@@ -163,5 +156,5 @@ export default function CardSide({ toggle }) {
 }
 
 
- 
+
 

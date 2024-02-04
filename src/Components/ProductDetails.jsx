@@ -1,47 +1,17 @@
 import { useRef } from "react";
 import { useState } from "react"
 import ProductList from "./ProductList";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 function ProductDetails() {
-    const list = [
-        {
-            id: 1928,
-            img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/kitchen-island-set-300x300.png",
-            name: "White Kitchen Island",
-            price: "5,350.75",
-            category: "Kitchen",
-        },
-        {
-            id: 2002,
-            img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/working-chair-with-armrest-300x300.png",
-            name: "Beige Working Chair With Armrest",
-            price: "784.00",
-            category: "Home Office",
-        },
-        {
-            id: 3229,
-            img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/king-size-master-bedroom-300x300.png",
-            name: "King Size Master Bedroom",
-            price: "14,500.50",
-            category: "Bedroom",
-        }
-    ];
-    const details = {
-        "id": 1928,
-        "img": "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/kitchen-island-set-300x300.png",
-        "name": "White Kitchen Island",
-        "price": "5,350.75",
-        "category": "Kitchen",
-        "disc": "Habitasse eaque wisi molestie, mollis pharetra convallis exercitation, distinctio eu arcu fugit nibh donec exercitationem, quisque imperdiet mattis proident cupiditate habitant assumenda.",
-        "features": {
-            "text": "Ut at ante diam. Vestibulum tincidunt lacus quis odio iaculis, nec iaculis ipsum hendrerit. Curabitur nec fringilla sem. Nullam at diam et ligula tincidunt luctus. Ut fringilla vitae orci eget suscipit. Etiam ultricies justo ac feugiat dignissim.",
-            "items": [
-                "Etiam eu tortor tempor, malesuada",
-                " Nunc vitae erat sit amet neque varius consequat",
-                "Lorem ipsum dolor sit amet"
-            ]
-        }
-    }
+    const dispatch = useDispatch()
+    const { id } = useParams();
+    const products = useSelector(state => state.products)
+    const details = products.find((product) => product.id === Number(id))
+    const list = products.filter((item) => {
+        return item.category === details?.category;
+    });
     const [quantity, setQuantity] = useState(1);
     const [switchDescRev, setSwitchDescRev] = useState(true)
     const quantityField = useRef()
@@ -69,6 +39,20 @@ function ProductDetails() {
         if (newValue >= 0 || newValue == "") {
             (newValue == "") ? setQuantity(0) : setQuantity(parseInt(newValue))
         }
+    }
+    const handleAddCart = () => {
+        const data = {
+            title: details.name,
+            id: details.id,
+            img: details.img,
+            price: details.price,
+            count: quantity
+        }
+        dispatch({
+            type: "ADD_TO_CART",
+            payload: data
+        })
+        alert("Product added to cart")
     }
     return (
         <>
@@ -112,7 +96,7 @@ function ProductDetails() {
                                 </span>
                             </div>
                             <div>
-                                <button className="bg-primary px-7 py-3 text-semi-black text-[0.75rem]  mt-3 sm:mt-0 sm:ml-5 hover:text-semi-white font-medium leading-tight uppercase tracking-wider">add to card</button>
+                                <button onClick={handleAddCart} className="bg-primary px-7 py-3 text-semi-black text-[0.75rem]  mt-3 sm:mt-0 sm:ml-5 hover:text-semi-white font-medium leading-tight uppercase tracking-wider">add to card</button>
                             </div>
                         </div>
                         <div className="mt-2">
@@ -164,7 +148,7 @@ function ProductDetails() {
                             </div>
                             <div>
                                 <ul>
-                                    {details.features.items.map((item,index) => {
+                                    {details.features.items.map((item, index) => {
                                         return <div key={index} className="flex mb-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#edb932" className="bi bi-check2" viewBox="0 0 16 16">
                                                 <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" />
@@ -184,12 +168,12 @@ function ProductDetails() {
                             </div>
                             <div>
                                 <ul>
-                                    {details.features.items.map((item,index) => {
-                                        return <div key={index}  className="flex mb-2">
+                                    {details.features.items.map((item, index) => {
+                                        return <div key={index} className="flex mb-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#edb932" className="bi bi-check2" viewBox="0 0 16 16">
                                                 <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" />
                                             </svg>
-                                            <li  className="ml-4">{item}</li>
+                                            <li className="ml-4">{item}</li>
                                         </div>
                                     })}
                                 </ul>
@@ -227,7 +211,7 @@ function ProductDetails() {
                     </div>
                     <div>
                         <div className="border p-8">
-                            <span className="text-semi-black  text-[23px] opacity-[0.8] leading-5 font-medium">Be the first to review “Blue Comfy Fabric Chair”</span>
+                            <span className="text-semi-black  text-[23px] opacity-[0.8] leading-5 font-medium">Be the first to review “{details.name}”</span>
                             <form className="mt-3" action="">
                                 <p className="mb-5">
                                     <span >Your email address will not be published. Required fields are marked *</span>
@@ -238,7 +222,7 @@ function ProductDetails() {
                                         <div className="flex items-center p-[4px]">
                                             {/* Rating Stars */}
                                             <div className="flex">
-                                                {[...Array(5)].map((_,index) => {
+                                                {[...Array(5)].map((_, index) => {
                                                     const starValue = index + 1;
                                                     return (
                                                         <label

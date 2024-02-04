@@ -10,11 +10,11 @@ const Home = () => {
   return (
     <>
       <HomeHeader />
-      <NewCollection/>
+      <NewCollection />
       <HomeMostSallingProduct />
-      <SalesUp/>
-      <WhatPeopleSay /> 
-      <WhyChoseUs/> 
+      <SalesUp />
+      <WhatPeopleSay />
+      <WhyChoseUs />
       <SeeLastCol />
 
     </>
