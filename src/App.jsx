@@ -7,6 +7,8 @@ import Contact from "./pages/Contact";
 import ProductPageLayout from "./pages/productPageLayout";
 import CategoryPageHeader from "./Components/categoryPageHeader";
 import ProductDetails from "./Components/ProductDetails";
+import ViewCarT from "./Components/View_CarT";
+import Checkout from "./Components/Checkout";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { reducer } from "./reducers/commandReducer";
@@ -15,6 +17,35 @@ function App() {
   const store = createStore(reducer);
   return (
     <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="products" element={<ProductPageLayout />}>
+              <Route
+                path="category/:category"
+                element={<CategoryPageHeader />}
+              />
+            </Route>
+            <Route
+              path="/product/:id"
+              element={
+                <>
+                  {" "}
+                  <ProductDetails />
+                </>
+              }
+            />
+            <Route path="rooms" element={<Rooms />} />
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="ViewCarT" element={<ViewCarT/>} />
+            <Route path="checkout" element={<Checkout />} />
+
+            <Route path="*" element={<>check your link 404 route</>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
