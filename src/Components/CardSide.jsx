@@ -4,7 +4,14 @@ import { Link } from "react-router-dom";
 
 export default function CardSide({ toggle }) {
   const dispatch = useDispatch();
+  const [somme, setSomme] = useState(0);
   const orders = useSelector((state) => state.orders);
+  const handeDeleteorder = (val) => {
+    dispatch({
+      type: "DELETE_ORDER",
+      payload: val
+    })
+  }
   const [isToggle, setIsToggle] = useState();
   useEffect(() => {
     setIsToggle(toggle);
@@ -13,11 +20,23 @@ export default function CardSide({ toggle }) {
   const CloseCart = () => {
     setIsToggle(false);
   };
+  const calculateTotal = () => {
+    let total = 0;
+    orders.forEach((order) => {
+      total += Number(order.price) * order.count;
+    });
+    setSomme(total);
+  };
+  useEffect(() => {
+    calculateTotal();
+  }, [orders]);
+
+
+
 
   if (isToggle) {
     return (
       <>
-
         <div className="bg-white z-[999999] shadow-md h-screen w-full lg:w-5/12 xl:w-5/12 md:w-8/12 fixed top-0 right-0">
 
           <div className="w-full h-16 flex justify-between items-center px-6 border-b">
@@ -36,7 +55,7 @@ export default function CardSide({ toggle }) {
             </div>
           </div>
 
-          <div className="w-full h-[78vh] flex flex-col items-center overflow-x-auto py-6 px-3 relative">
+          <div className="w-full h-[78vh] flex flex-col items-center overflow-x-auto py-6 px-3 relative overflow-y-auto max-h-[57%]">
             {
               orders && orders.length > 0 ?
                 orders.map((order) => {
@@ -60,6 +79,8 @@ export default function CardSide({ toggle }) {
                             className="cursor-pointer"
                           >
                             <svg
+                              
+                              onClick={()=>handeDeleteorder(order.id)}
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
                               viewBox="0 0 24 24"
@@ -114,31 +135,27 @@ export default function CardSide({ toggle }) {
           </div>
 
           {orders && orders.length > 0 ?
-            orders.map((order) => {
-              return (
                 <div>
                 <div className="absolute bottom-36 w-full py-4 px-5 flex justify-between border-t border-b">
                   {/* here will be a state that calculats the total price of all products the client ordered */}
                   <span className="font-bold text-gray-600">Subtotal:</span>
-                  <span className="font-medium text-semi-gray">MAD 231</span>
+                  <span className="font-medium text-semi-gray">MAD {somme}</span>
                 </div>
                 <div className="  absolute left-5 bottom-4 right-5 flex flex-col justify-center items-center">
-                  <button className="w-full mb-4 bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
+                  <button className="w-full mb-4 bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hov hover:duration-500 ">
                     <Link to={"ViewCarT"}>VIEW CART</Link>
                   </button>
-                  <button className="w-full bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
+                  <button className="w-full bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hov hover:duration-500 ">
                     <Link to={"/"}></Link>CHECKOUT
                   </button>
                 </div>
               </div>
-              );
-            })
             :
-            <button className=" absolute left-6 bottom-4 right-6 bg-primary flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
+            <button className=" absolute left-6 bottom-4 right-6 bg-primary flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hov hover:duration-500 ">
               <Link to={"/products"}>CONTINUE SHOPPING</Link>
             </button>
           }
-
+        
         </div>
 
         <div
@@ -146,7 +163,7 @@ export default function CardSide({ toggle }) {
 
           className="bg-semi-black bg-opacity-45 fixed z-[999998] top-0 left-0 bottom-0 right-0 h-screen w-full cursor-pointer"
         >
-
+      
         </div>
       </>
     );
@@ -154,7 +171,5 @@ export default function CardSide({ toggle }) {
     ''
   }
 }
-
-
 
 

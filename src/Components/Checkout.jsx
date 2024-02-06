@@ -1,4 +1,19 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
 function Checkout() {
+  const orders = useSelector(state => state.orders);
+  const [somme, setSomme] = useState(0)
+  const calculateTotal = () => {
+    let total = 0;
+    orders.forEach((order) => {
+      total += Number(order.price) * order.count;
+    });
+    setSomme(total);
+  };
+  useEffect(() => {
+    calculateTotal();
+  }, [orders]);
   return (
     <div>
       <div className="bg-gray-50 container lg:px-40 lg:py-8 lg:pb-20 px-8 py-8">
@@ -95,32 +110,34 @@ function Checkout() {
                 </tr>
               </thead>
               <tbody>
-                <tr className=" border  ">
-                  <th className="px-6 py-4 font-medium text-gray-600 ">
-                    Bathroom Wooden Table × 1
-                  </th>
-                  <td className="px-6 py-4">$550.00</td>
-                </tr>
-                <tr className=" border">
-                  <th className="px-6 py-4 font-medium text-gray-600 ">
-                    Green Living Room Sofa × 1
-                  </th>
-                  <td className="px-6 py-4">$1,200.00</td>
-                </tr>
+                {
+                  orders.map((order) => {
+                    return (
+                      <tr key={order.id} className="border">
+                        <th className="px-6 py-4 font-medium text-gray-600 ">
+                          {order.title} × {order.count}
+                        </th>
+                        <td className="px-6 py-4">MAD {order.price * order.count}</td>
+                      </tr>
+                    )
+                  })
+                }
               </tbody>
               <tfoot>
                 <tr className="border">
                   <th className="px-6 py-4 font-medium text-gray-500 ">
                     Subtotal
                   </th>
-                  <td className="px-6 py-4">$1,750.00</td>
+                  <td className="px-6 py-4">
+                    MAD  {somme}
+                  </td>
                 </tr>
                 <tr className="border">
                   <th className="px-6 py-4 text-xl font-bold text-gray-500 ">
                     Total
                   </th>
                   <td className="px-6 py-4 text-xl font-bold text-gray-500">
-                    $1,750.00
+                    MAD {somme + 1000}
                   </td>
                 </tr>
               </tfoot>

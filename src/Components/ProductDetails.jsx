@@ -7,11 +7,29 @@ import { useDispatch, useSelector } from "react-redux";
 function ProductDetails() {
     const dispatch = useDispatch()
     const { id } = useParams();
+    console.log(id, "iddds")
     const products = useSelector(state => state.products)
-    const details = products.find((product) => product.id === Number(id))
+    const details = products.find((product) => product.id === id)
+    // const details = {
+    //     "id": 1928,
+    //     "img": "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/kitchen-island-set-300x300.png",
+    //     "name": "White Kitchen Island",
+    //     "price": "5,350.75",
+    //     "category": "Kitchen",
+    //     "disc": "Habitasse eaque wisi molestie, mollis pharetra convallis exercitation, distinctio eu arcu fugit nibh donec exercitationem, quisque imperdiet mattis proident cupiditate habitant assumenda.",
+    //     "features": {
+    //         "text": "Ut at ante diam. Vestibulum tincidunt lacus quis odio iaculis, nec iaculis ipsum hendrerit. Curabitur nec fringilla sem. Nullam at diam et ligula tincidunt luctus. Ut fringilla vitae orci eget suscipit. Etiam ultricies justo ac feugiat dignissim.",
+    //         "items": [
+    //             "Etiam eu tortor tempor, malesuada",
+    //             " Nunc vitae erat sit amet neque varius consequat",
+    //             "Lorem ipsum dolor sit amet"
+    //         ]
+    //     }
+    // }
     const list = products.filter((item) => {
         return item.category === details?.category;
     });
+    console.log(list, "list")
     const [quantity, setQuantity] = useState(1);
     const [switchDescRev, setSwitchDescRev] = useState(true)
     const quantityField = useRef()
@@ -34,7 +52,6 @@ function ProductDetails() {
 
     }
     const handleChangeQuantity = () => {
-        // const newValue = parseInt(quantityField.current.value.replace(/[^0-9]/g,''));
         const newValue = quantityField.current.value.replace(/[^0-9]/g, '')
         if (newValue >= 0 || newValue == "") {
             (newValue == "") ? setQuantity(0) : setQuantity(parseInt(newValue))

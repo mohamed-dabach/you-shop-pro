@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 // give it array of products check /data/db.json
 
 export default function ProductList({ list }) {
+
 
   return (
     <ul className="grid grid-cols-2 max-[500px]:grid-cols-1  gap-2 md:grid-cols-3 lg:grid-cols-4">
@@ -14,16 +16,27 @@ export default function ProductList({ list }) {
     </ul>
   );
 };
-
 const ItemProduct = ({ product }) => {
+  const dispatch = useDispatch()
   const handleAddToCart = () => {
-    console.log("add to cart");
+    // add to cart logic here
+    const data = {
+      title: product.name,
+      id: product.id,
+      img: product.img,
+      price: product.price,
+      count: 1
+    }
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: data
+    })
   };
   return (
     <li className="p-1 relative  group  border text-center">
       <div
         onClick={handleAddToCart}
-        className="hidden group absolute hover:shadow-md  cursor-pointer shadow-lg w-8 h-8 group-hover:grid  place-content-center rounded-full right-5 top-5 z-50"
+        className="hidden group absolute hover:shadow-md hover:scale-110  cursor-pointer shadow-lg w-8 h-8 group-hover:grid  place-content-center rounded-full right-5 top-5 z-50"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +77,7 @@ ItemProduct.propTypes = {
     name: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
 };
 
 ProductList.propTypes = {
@@ -76,6 +89,6 @@ ProductList.propTypes = {
       category: PropTypes.string,
       price: PropTypes.string,
     })
-  ),
+  ).isRequired,
 };
 

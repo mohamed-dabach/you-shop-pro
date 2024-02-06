@@ -55,7 +55,7 @@ function AboutUs() {
                   boxShadow: "16px 24px 80px -16px rgba(0, 0, 0, 0.4)",
                 }}
                 loading="lazy"
-                src="/public/about-founder.jpg"
+                src="/about-founder.jpg"
                 alt="imgfounder"
               />
             </div>

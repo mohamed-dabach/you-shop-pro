@@ -25,7 +25,6 @@ export const reducer = (state = initialValue, action) => {
         } else {
           return order;
         }
-        console.log(updatedCmmands);
       });
       return { ...state, orders: updatedCmmands };
     }
@@ -38,7 +37,6 @@ export const reducer = (state = initialValue, action) => {
     }
     case "ADD_TO_CART":
       const { id, title, img, price, count } = action.payload
-      console.log(id, title, img, price, count)
       return {
         ...state,
         orders: [
@@ -51,6 +49,14 @@ export const reducer = (state = initialValue, action) => {
           }
         ]
       }
+    case "DELETE_ORDER":
+      const ids = action.payload
+      const newOrders = [...state.orders].filter((item) => item.id !== ids)
+    console.log(newOrders)
+      return {
+        ...state, orders: newOrders
+      }
+
     default:
       return state;
   }
