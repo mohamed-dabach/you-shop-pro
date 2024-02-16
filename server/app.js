@@ -1,9 +1,28 @@
 const express = require("express");
 const productsRouter = require("./routes/products");
-const mongoose = require("./database");
 const app = express();
 
 app.use(express.json());
+
 app.use("/products", productsRouter);
+
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+
+  err.status = err.status || "error";
+
+  if (process.env.ENV === "developpment") {
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message,
+      error: err,
+    });
+  } else if (process.env.ENV === "production") {
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: "There was an error",
+    });
+  }
+});
 
 module.exports = app;
