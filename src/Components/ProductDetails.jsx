@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useState } from "react"
 import ProductList from "./ProductList";
 
+
 function ProductDetails() {
     const list = [
         {
@@ -45,6 +46,10 @@ function ProductDetails() {
     const [quantity, setQuantity] = useState(1);
     const [switchDescRev, setSwitchDescRev] = useState(true)
     const quantityField = useRef()
+
+    // const dispatch = useDispatch()
+    // const OrderCount = useSelector((store) => store.orders.orders)
+    // console.log('from detais',OrderCount.name)
     const handleClickQuantity = (event) => {
         switch (event.target.name) {
             case "+":

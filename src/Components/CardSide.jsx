@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { DECRIMENTACTION, INCREMENTACTION } from "../REDUX/OrdersReducer/ActionsOr";
 
 export default function CardSide({ toggle }) {
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders);
+  const orders = useSelector((store) => store.orders.orders);
+  
+  const [total,setTotal] =useState(0)
 
+const TotalPrices =()=>{
+  const total =0;
+   
+}
   console.log(orders);
 
   const [isToggle, setIsToggle] = useState();
@@ -43,7 +50,7 @@ export default function CardSide({ toggle }) {
           <div className="w-full h-[78vh] flex flex-col items-center overflow-x-auto py-6 px-3 relative">
             {
               orders && orders.length > 0 ?
-                orders.map((order) => {
+               orders.map((order) => {
                   return (
                     <div
                       key={order.id}
@@ -58,7 +65,7 @@ export default function CardSide({ toggle }) {
                         <div className=" w-full px-2 flex justify-between mb-2">
                           <div className="font-bold text-gray-700">
                             {/* product's title */}
-                            {order.title}
+                            {order.name}
                           </div>
                           <div
                             // onClick={() => {
@@ -83,12 +90,7 @@ export default function CardSide({ toggle }) {
                             {/* here we can get the order number for each product */}
                             <button
                               className="px-3 py-2 border"
-                              onClick={() => {
-                                dispatch({
-                                  type: "update_product",
-                                  payload: { id: order.id, type: "dec" },
-                                });
-                              }}                            >
+                              onClick={()=>{dispatch(DECRIMENTACTION(order.id))}}>
                               -
                             </button>
                             <span className="px-3 py-2 border border-black">
@@ -96,13 +98,7 @@ export default function CardSide({ toggle }) {
                             </span>
                             <button
                               className="px-3 py-2 border"
-                              onClick={() => {
-                                dispatch({
-                                  type: "update_product",
-                                  payload: { id: order.id, type: "inc" },
-                                });
-                              }}
-                            >
+                              onClick={()=>{dispatch(INCREMENTACTION(order.id))}}>
                               +
                             </button>
                           </div>
@@ -116,18 +112,20 @@ export default function CardSide({ toggle }) {
                   );
                 })
               :
+              
                <span className="text-gray-400 font-medium absolute left-32 top-52 ">No products in the cart</span>
             }
           </div>
 
      {orders && orders.length > 0 ?
             orders.map((order) => {
+              console.log('orders.length > 0',orders)
               return (
                 <div>
                 <div className="absolute bottom-36 w-full py-4 px-5 flex justify-between border-t border-b">
                   {/* here will be a state that calculats the total price of all products the client ordered */}
                   <span className="font-bold text-gray-600">Subtotal:</span>
-                  <span className="font-medium text-semi-gray">MAD 231</span>
+                  <span className="font-medium text-semi-gray">MAD {total}</span>
                 </div>
                 <div className="  absolute left-5 bottom-4 right-5 flex flex-col justify-center items-center">
                   <button onClick={CloseCart} className="w-full mb-4 bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
