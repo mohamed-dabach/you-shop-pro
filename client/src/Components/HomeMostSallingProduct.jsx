@@ -1,36 +1,16 @@
 import { Link } from "react-router-dom";
 import ProductList from "./ProductList";
+import useFetch from "../hocks/useFetch";
+
 const HomeMostSallingProduct = () => {
-  const list = [
-    {
-      id: "1928",
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/kitchen-island-set-300x300.png",
-      name: "White Kitchen Island",
-      price: "5,350.75",
-      category: "Kitchen",
-    },
-    {
-      id: "2002",
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/working-chair-with-armrest-300x300.png",
-      name: "Beige Working Chair With Armrest",
-      price: "784.00",
-      category: "Home Office",
-    },
-    {
-      id: "3229",
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/king-size-master-bedroom-300x300.png",
-      name: "King Size Master Bedroom",
-      price: "14,500.50",
-      category: "Bedroom",
-    },
-    {
-      id: "9735",
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/cream-ceramic-oval-bathtub-300x300.png",
-      name: "Ceramic Oval Bathtub",
-      price: "11,200.00",
-      category: "Bathroom",
-    },
-  ];
+  const {
+    data: data2,
+    loading: loading2,
+    error: err2,
+  } = useFetch(`/products?fields=category,name,price,img&limit=4&sort=random`);
+
+  const list = data2?.products;
+
   return (
     <div className="">
       <div className="container px-10 flex flex-col">

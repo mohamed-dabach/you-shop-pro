@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { BASE_URL } from "../constants";
 const useFetch = (url) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
@@ -7,9 +7,12 @@ const useFetch = (url) => {
   useEffect(() => {
     setLoading("Loading");
 
-    fetch(url)
+    fetch(`${BASE_URL}${url}`)
       .then((res) => {
-        if (res.status !== 200) throw new Error("There was an error while fetching: ErrorCode " + res.status);
+        if (res.status !== 200)
+          throw new Error(
+            "There was an error while fetching: ErrorCode " + res.status
+          );
         return res.json();
       })
       .then((data) => {

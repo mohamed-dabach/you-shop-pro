@@ -1,19 +1,67 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import ProductList from "../Components/ProductList";
 import SideProductFilters from "../Components/SideProductFilter";
-import { useState } from "react";
-import { BASE_URL } from "../constants";
+import { useEffect, useState } from "react";
+// import { BASE_URL } from "../constants";
 import useFetch from "../hocks/useFetch";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setLength,
+  setLoading,
+  setCategorys,
+  setProducts,
+} from "../redux/reducers/productReducer";
+import {
+  allProducts,
+  lengthProducts,
+  loadingProducts,
+} from "../redux/selectors";
+
 export default function Products() {
+  const dispatch = useDispatch();
+  const location = useLocation();
+
   const [showFilters, setShowFilters] = useState(false);
+  const productss = useSelector(allProducts);
+  const loading = useSelector(loadingProducts);
+  const length = useSelector(lengthProducts);
 
-  const { data, loading, error } = useFetch(BASE_URL + "/products");
+  const isCategoryPage = location.pathname.includes("/category/");
 
+  const {
+    data,
+    loading: isLoading,
+    error,
+  } = useFetch("/products?fields=category,name,price,img");
 
-  
+  const categorys = data?.products.reduce((acc, curr) => {
+    if (!acc[curr.category]) {
+      acc[curr.category] = 1;
+    } else {
+      acc[curr.category]++;
+    }
+    return acc;
+  }, {});
+
+  useEffect(() => {
+    dispatch(setCategorys(categorys));
+  }, [dispatch, categorys]);
+
+  useEffect(() => {
+    if (isCategoryPage) return;
+
+    dispatch(setLoading(isLoading));
+
+    if (data) {
+      dispatch(setProducts(data.products));
+      dispatch(setLength(data.length));
+    }
+  }, [data, dispatch, isCategoryPage, isLoading, error]);
+
   function handleToggleFilters() {
     setShowFilters((prev) => !prev);
   }
+
   return (
     <>
       {showFilters && (
@@ -35,7 +83,13 @@ export default function Products() {
                 </span>
                 <span className=" uppercase">Options</span>
               </button>
-              <p className=" my-2">Showing 1–12 of 18 results</p>
+              {length ? (
+                <p className=" my-2">
+                  Showing 1–{length} of {length} results
+                </p>
+              ) : (
+                ""
+              )}
             </div>
             <div className="">
               <form className="">
@@ -57,7 +111,7 @@ export default function Products() {
             <p className="m-3 text-red-500">{error}</p>
           ) : (
             <>
-              <ProductList list={data} />
+              <ProductList list={productss} />
               <p className="text-center px-3 py-1 w-fit m-auto my-5 border-semi-gray border">
                 No more products to show
               </p>

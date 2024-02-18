@@ -2,15 +2,15 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addOrder } from "../redux/reducers/cardReducer";
-// give it array of products check /data/db.json
 
 export default function ProductList({ list }) {
   return (
     <ul className="grid grid-cols-2 max-[500px]:grid-cols-1  gap-2 md:grid-cols-3 lg:grid-cols-4">
-      {list &&
-        list.map((item) => {
-          return <ItemProduct key={item.id} product={item} />;
-        })}
+      {list && list?.length > 0
+        ? list.map((item) => {
+            return <ItemProduct key={item.id} product={item} />;
+          })
+        : "No Products Found"}
     </ul>
   );
 }
@@ -72,7 +72,7 @@ ItemProduct.propTypes = {
     img: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
   }),
 };
 
@@ -83,7 +83,7 @@ ProductList.propTypes = {
       img: PropTypes.string,
       name: PropTypes.string,
       category: PropTypes.string,
-      price: PropTypes.string,
+      price: PropTypes.number,
     })
   ),
 };

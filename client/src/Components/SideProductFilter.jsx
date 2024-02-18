@@ -1,19 +1,59 @@
 import Slider from "@mui/material/Slider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../constants";
+import { useDispatch, useSelector } from "react-redux";
+import { setLength, setProducts } from "../redux/reducers/productReducer";
+import { productCategory } from "../redux/selectors";
 
 const SideProductFilters = ({ handleToggleFilters }) => {
+  const dispatch = useDispatch();
   const [maxMinPrice, setMaxMinPrice] = useState([20, 37]);
-  function handleFilterByPrice() {}
+  const [isfilterbyPrice, setIsFilterByPrice] = useState(false);
+  function handleFilterByPrice() {
+    setIsFilterByPrice(true);
+  }
+  const categories = useSelector(productCategory);
 
-  const categories = [
-    { category: "Bathroom", count: 4 },
-    { category: "Living Room", count: 7 },
-    { category: "Bedroom", count: 2 },
-    { category: "Cabinet", count: 4 },
-    { category: "Kitchen", count: 49 },
-  ];
+  useEffect(() => {
+    if (!isfilterbyPrice) return;
+    fetch(
+      `${BASE_URL}/products?price[gte]=${maxMinPrice[0]}&price[lte]=${maxMinPrice[1]}&fields=category,name,price,img`
+    )
+      .then((res) => res.json())
+      .then(
+        (data) =>
+          dispatch(setProducts(data.products)) &&
+          dispatch(setLength(data.length))
+      )
+      .catch((err) => console.log(err));
+    setIsFilterByPrice(false);
+  }, [isfilterbyPrice, maxMinPrice, dispatch]);
+  ///
+
+  // search product by name
+  const [search, setSearch] = useState("");
+  const [isSearch, setIsSearch] = useState(false);
+
+  function handleSearchByName() {
+    setIsSearch(true);
+  }
+  useEffect(() => {
+    if (!isSearch) return;
+    if (search === "") return setIsSearch(false);
+    fetch(`${BASE_URL}/products?~name=${search}&fields=category,name,price,img`)
+      .then((res) => res.json())
+      .then(
+        (data) =>
+          dispatch(setProducts(data.products)) &&
+          dispatch(setLength(data.length))
+      )
+      .catch((err) => console.log(err));
+    setIsSearch(false);
+  }, [isSearch, setIsSearch, dispatch, search]);
+  console.log(categories);
+  //////
 
   return (
     <>
@@ -42,8 +82,13 @@ const SideProductFilters = ({ handleToggleFilters }) => {
             type="text"
             className=" ps-2 border"
             placeholder="Search Product"
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
           />
-          <button className="uppercase border bg-primary text-sm p-2 text-semi-black tracking-wide font-semibold">
+          <button
+            onClick={handleSearchByName}
+            className="uppercase border bg-primary text-sm p-2 text-semi-black tracking-wide font-semibold"
+          >
             Search
           </button>
         </div>
@@ -73,10 +118,11 @@ const SideProductFilters = ({ handleToggleFilters }) => {
           <h4 className="mb-5 text-xl font-semibold">Product categories</h4>
           <ul className="flex flex-col gap-2 p-2 overflow-y-auto h-[200px] ">
             {categories &&
-              categories.map((item) => {
+              Object.entries(categories).map(([category, count]) => {
+                const item = { category, count };
                 return (
                   <CategoryItem
-                    key={item.category}
+                    key={category}
                     handleToggleFilters={handleToggleFilters}
                     item={item}
                   />
@@ -90,6 +136,7 @@ const SideProductFilters = ({ handleToggleFilters }) => {
 };
 
 const CategoryItem = ({ item, handleToggleFilters }) => {
+  console.log(item);
   return (
     <>
       <li className=" flex justify-between ">
@@ -117,6 +164,8 @@ function RangeSlider({ maxMinPrice, setMaxMinPrice }) {
       value={maxMinPrice}
       onChange={handleChange}
       valueLabelDisplay="off"
+      min={0}
+      max={10000}
       disableSwap
     />
   );

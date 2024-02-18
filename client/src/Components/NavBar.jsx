@@ -26,7 +26,7 @@ const NavBar = ({ handleClick }) => {
   }
 
   const cardOrdersCount = useSelector(orders).length;
-  
+
   // console.log(cardOrdersCount);
   return (
     <>

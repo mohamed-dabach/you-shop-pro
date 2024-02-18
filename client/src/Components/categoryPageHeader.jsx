@@ -1,7 +1,20 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import useFetch from "../hocks/useFetch";
+import { useDispatch } from "react-redux";
+import { setLoading, setProducts } from "../redux/reducers/productReducer";
 
 const CategoryPageHeader = () => {
   const { category } = useParams();
+  console.log(category);
+  const dispatch = useDispatch();
+  const { data, loading, error } = useFetch(
+    `/products?fields=category,name,price,img&category=${category}`
+  );
+  useEffect(() => {
+    dispatch(setProducts(data?.products));
+    dispatch(setLoading(data?.loading));
+  }, [data, dispatch]);
   return (
     <>
       <div className="my-2">

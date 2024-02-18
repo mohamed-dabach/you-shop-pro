@@ -1,36 +1,14 @@
 import { Link } from "react-router-dom";
 import ProductList from "./ProductList";
+import useFetch from "../hocks/useFetch";
 export default function NewCollection() {
-  const ListProducts = [
-    {
-      id: "9735",
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/cream-ceramic-oval-bathtub-300x300.png",
-      name: "Ceramic Oval Bathtub",
-      price: "11,200.00",
-      category: "Bathroom",
-    },
-    {
-      id: "9947",
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/bathroom-wooden-table-300x300.png",
-      name: "Bathroom Wooden Table",
-      price: "550.00",
-      category: "Bathroom",
-    },
-    {
-      id: "7098",
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/living-room-green-sofa-300x300.png",
-      name: "Green Living Room Sofa",
-      price: "1,840.00",
-      category: "Living Room",
-    },
-    {
-      id: "1022",
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/single-blue-fabric-chair-1-300x300.png",
-      name: "Blue Comfy Fabric Chair",
-      price: "580.50",
-      category: "Bedroom",
-    },
-  ];
+  const {
+    data: data2,
+    loading: loading2,
+    error: err2,
+  } = useFetch(`/products?fields=category,name,price,img&limit=4&sort=random`);
+
+  const ListProducts = data2?.products;
 
   return (
     <>
@@ -87,7 +65,7 @@ export default function NewCollection() {
           />
           <div className="flex  w-auto absolute bottom-9 left-7 z-20">
             <h1 className=" font-bold text-[1.6rem] text-white hover:text-secondary duration-500 ">
-              <Link to={"rooms"}>Living Room</Link>
+              <Link to={"rooms#Living Room"}>Living Room</Link>
             </h1>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +93,7 @@ export default function NewCollection() {
           />
           <div className="flex w-auto absolute bottom-9 left-7 z-20">
             <h1 className=" font-bold text-[1.6rem] text-white hover:text-secondary duration-500 ">
-              <Link to={"rooms"}>Bedroom</Link>
+              <Link to={"rooms#Bedroom"}>Bedroom</Link>
             </h1>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +123,7 @@ export default function NewCollection() {
           <div className="flex w-auto absolute bottom-9 left-7 z-20">
             <h1 className=" font-bold text-[1.6rem] text-white hover:text-secondary duration-500 ">
               {" "}
-              <Link to={"rooms"}>Kitchen</Link>
+              <Link to={"rooms#Kitchen"}>Kitchen</Link>
             </h1>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -174,7 +152,7 @@ export default function NewCollection() {
           <div className="flex w-auto absolute bottom-9 left-7 z-20">
             <h1 className=" font-bold text-[1.6rem] text-white hover:text-secondary duration-500 ">
               {" "}
-              <Link to={"rooms"}>Bath Room</Link>
+              <Link to={"rooms#Bath Room"}>Bath Room</Link>
             </h1>
             <svg
               xmlns="http://www.w3.org/2000/svg"
