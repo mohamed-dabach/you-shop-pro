@@ -9,16 +9,21 @@ import { orders } from "../redux/selectors";
 import PropTypes from "prop-types";
 
 export default function CardSide() {
+  const formatNumber = (number) => {
+    return number.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+    });
+  };
   const dispatch = useDispatch();
   const cardOrders = useSelector(orders);
 
   // calculate the total price for the ordres
-  const total = () => {
-    return cardOrders.reduce(
+  const total = formatNumber(
+    cardOrders.reduce(
       (acc, curr) => (acc += parseFloat(curr.price) * curr.quantity),
       0
-    );
-  };
+    )
+  );
 
   function toggleCArd() {
     dispatch(toggleCard());
@@ -47,11 +52,9 @@ export default function CardSide() {
               return <CardItem order={order} key={order.id} />;
             })
           ) : (
-            
-              <span className="absolute top-1/2 text-gray-400 text-center font-medium ">
-                No products in the cart
-              </span>
-       
+            <span className="absolute top-1/2 text-gray-400 text-center font-medium ">
+              No products in the cart
+            </span>
           )}
         </div>
         {cardOrders.length > 0 ? (
@@ -59,16 +62,18 @@ export default function CardSide() {
             <div className=" w-full py-4 px-5 flex justify-between border-t border-b">
               {/* here will be a state that calculats the total price of all products the client ordered */}
               <span className="font-bold text-gray-600">Subtotal:</span>
-              <span className="font-medium text-semi-gray">MAD {total()}</span>
+              <span className="font-medium text-semi-gray">MAD {total}</span>
             </div>
-            <div className="  flex flex-col justify-center items-center">
+            <div className=" px-5 flex flex-col justify-center items-center">
               <Link
+                onClick={toggleCArd}
                 to={"ViewCarT"}
                 className="w-full mb-4 bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1"
               >
                 VIEW CART
               </Link>
               <Link
+                onClick={toggleCArd}
                 to={"/checkout"}
                 className="w-full bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1"
               >
@@ -78,7 +83,9 @@ export default function CardSide() {
           </div>
         ) : (
           <button className=" absolute left-6 bottom-4 right-6 bg-primary flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
-            <Link to={"/products"}>CONTINUE SHOPPING</Link>
+            <Link onClick={toggleCArd} to={"/products"}>
+              CONTINUE SHOPPING
+            </Link>
           </button>
         )}
       </div>
@@ -98,6 +105,11 @@ const CardItem = ({ order }) => {
   const handleProductDetails = () => {
     navigate(`/product/${order.id}`);
     dispatch(toggleCard());
+  };
+  const formatNumber = (number) => {
+    return number.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+    });
   };
   return (
     <div
@@ -158,7 +170,7 @@ const CardItem = ({ order }) => {
             </button>
           </div>
           <div className="w-5/12 text-right text-semi-gray px-2 font-semibold">
-            MAD {order.price}
+            MAD {formatNumber(order.price)}
           </div>
         </div>
       </div>

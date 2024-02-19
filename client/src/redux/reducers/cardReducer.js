@@ -1,19 +1,19 @@
 export const initialValue = {
   orders: [
-    {
-      id: 123,
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/kitchen-island-set-300x300.png",
-      name: "wooden stool",
-      price: 50,
-      quantity: 3,
-    },
-    {
-      id: 122,
-      img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/king-size-master-bedroom-300x300.png",
-      name: "green bedroom swate ",
-      price: 100,
-      quantity: 1,
-    },
+    // {
+    //   id: 123,
+    //   img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/kitchen-island-set-300x300.png",
+    //   name: "wooden stool",
+    //   price: 50,
+    //   quantity: 3,
+    // },
+    // {
+    //   id: 122,
+    //   img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/king-size-master-bedroom-300x300.png",
+    //   name: "green bedroom swate ",
+    //   price: 100,
+    //   quantity: 1,
+    // },
   ],
   showCard: false,
 };
@@ -39,6 +39,16 @@ const cardRedcure = (state = initialValue, action) => {
           return order;
         }
         console.log(updatedCmmands);
+      });
+      return { ...state, orders: updatedCmmands };
+    }
+    case "update_order_by_value": {
+      const updatedCmmands = state.orders.map((order) => {
+        if (order.id === action.payload.id) {
+          return { ...order, quantity: action.payload.value };
+        } else {
+          return order;
+        }
       });
       return { ...state, orders: updatedCmmands };
     }
@@ -77,4 +87,8 @@ export const updateOrder = (payload) => ({
   payload,
 });
 
+export const updateOrderByValue = (payload) => ({
+  type: "update_order_by_value",
+  payload,
+});
 export default cardRedcure;

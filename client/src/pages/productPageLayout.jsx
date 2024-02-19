@@ -37,7 +37,7 @@ export default function Products() {
   const categorys = data?.products.reduce((acc, curr) => {
     if (!acc[curr.category]) {
       acc[curr.category] = 1;
-    } else {
+  } else {
       acc[curr.category]++;
     }
     return acc;

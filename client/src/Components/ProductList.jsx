@@ -57,7 +57,7 @@ const ItemProduct = ({ product: { id, img, name, price, category } }) => {
         <div className="">
           <p>{category}</p>
           <h3 className="text-secondary">{name}</h3>
-          <p>${price}</p>
+          <p>MAD {price}</p>
         </div>
       </Link>
     </li>

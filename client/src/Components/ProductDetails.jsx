@@ -1,10 +1,15 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import ProductList from "./ProductList";
 import useFetch from "../hocks/useFetch";
 import { Link, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addOrder } from "../redux/reducers/cardReducer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addOrder,
+  deleteOrder,
+  updateOrderByValue,
+} from "../redux/reducers/cardReducer";
+import { orders } from "../redux/selectors";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -12,7 +17,7 @@ function ProductDetails() {
   // fetching product details
   const { data, loading, error } = useFetch(`/products/${id}`);
   const details = data?.product?.[0];
-
+  const orderss = useSelector(orders);
   // fetching the related roducts
   const {
     data: data2,
@@ -22,45 +27,69 @@ function ProductDetails() {
 
   const list = data2?.products;
 
-  const [quantity, setQuantity] = useState(1);
   const [switchDescRev, setSwitchDescRev] = useState(true);
-  const quantityField = useRef();
+  const [shouldUpdate, setShouldUpdate] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+
+  const isInCard = orderss.find((ele) => ele.id === details?.id);
+
+  const firstLoad = useRef(true);
+
+  useEffect(() => {
+    if (!isInCard) return;
+    setQuantity(orderss.find((ele) => ele.id === details?.id).quantity);
+  }, [isInCard, dispatch, details?.id, orderss]);
+
+  useEffect(() => {
+    if (shouldUpdate) {
+      dispatch(updateOrderByValue({ id: details?.id, value: quantity }));
+      setShouldUpdate(false);
+    }
+  }, [quantity,shouldUpdate, dispatch, details?.id]);
 
   const handleClickQuantity = (event) => {
     switch (event.target.name) {
       case "+":
         setQuantity((prev) => prev + 1);
+        setShouldUpdate(true);
         break;
       case "-":
         if (quantity <= 1) {
           return;
         } else {
           setQuantity((prev) => prev - 1);
+          setShouldUpdate(true);
         }
         break;
       default:
         console.error("error");
     }
   };
-  const handleChangeQuantity = () => {
-    // const newValue = parseInt(quantityField.current.value.replace(/[^0-9]/g,''));
-    const newValue = quantityField.current.value.replace(/[^0-9]/g, "");
-    if (newValue >= 0 || newValue == "") {
-      newValue == "" ? setQuantity(0) : setQuantity(parseInt(newValue));
+  // console.log(quantity);
+
+  const handleChangeQuantity = (e) => {
+    if (e.target.value >= 0 || e.target.value == "") {
+      e.target.value == ""
+        ? setQuantity(1)
+        : setQuantity(parseInt(e.target.value));
     }
   };
-
   const handleAddToCard = () => {
-    dispatch(
-      addOrder({
-        id: details?.id,
-        img: details?.img,
-        name: details?.name,
-        price: details?.price,
-        category: details?.category,
-        quantity,
-      })
-    );
+    if (isInCard) {
+      dispatch(deleteOrder({ id: details.id }));
+      return;
+    } else {
+      dispatch(
+        addOrder({
+          id: details?.id,
+          img: details?.img,
+          name: details?.name,
+          price: details?.price,
+          category: details?.category,
+          quantity,
+        })
+      );
+    }
   };
 
   return (
@@ -123,7 +152,6 @@ function ProductDetails() {
                     type="text"
                     name="quantity"
                     id="quantity"
-                    ref={quantityField}
                     onChange={handleChangeQuantity}
                     value={quantity}
                   />
@@ -143,7 +171,7 @@ function ProductDetails() {
                   onClick={handleAddToCard}
                   className="bg-primary px-7 py-3 text-semi-black text-[0.75rem]  mt-3 sm:mt-0 sm:ml-5 hover:text-semi-white font-medium leading-tight uppercase tracking-wider"
                 >
-                  add to card
+                  {isInCard ? "Remove" : " add to card"}
                 </button>
               </div>
             </div>

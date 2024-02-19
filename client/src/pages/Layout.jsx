@@ -9,7 +9,7 @@ import { toggleSideCard } from "../redux/selectors";
 const Layout = () => {
   const dispatch = useDispatch();
   const showSideCard = useSelector(toggleSideCard);
-  console.log(showSideCard);
+  // console.log(showSideCard);
   const handleClick = () => {
     dispatch(toggleCard());
   };

@@ -1,4 +1,8 @@
+import { useSelector } from "react-redux";
+import { orders } from "../redux/selectors";
+
 function Checkout() {
+  const orderss = useSelector(orders);
   return (
     <div>
       <div className="bg-gray-50 container lg:px-40 lg:py-8 lg:pb-20 px-8 py-8">
@@ -84,48 +88,7 @@ function Checkout() {
               <p>Have a coupon?</p>
             </div>
           </div>
-
-          <div className=" bg-white px-6 py-8  ">
-            <h3 className="pb-4">Your order</h3>
-            <table className="w-5/6 text-sm text-left border rounded-t-lg">
-              <thead className="text-md font-medium text-gray-400 ">
-                <tr>
-                  <th className="px-6 py-3">Product</th>
-                  <th className="px-6 py-3">Subtotal</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className=" border  ">
-                  <th className="px-6 py-4 font-medium text-gray-600 ">
-                    Bathroom Wooden Table × 1
-                  </th>
-                  <td className="px-6 py-4">$550.00</td>
-                </tr>
-                <tr className=" border">
-                  <th className="px-6 py-4 font-medium text-gray-600 ">
-                    Green Living Room Sofa × 1
-                  </th>
-                  <td className="px-6 py-4">$1,200.00</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr className="border">
-                  <th className="px-6 py-4 font-medium text-gray-500 ">
-                    Subtotal
-                  </th>
-                  <td className="px-6 py-4">$1,750.00</td>
-                </tr>
-                <tr className="border">
-                  <th className="px-6 py-4 text-xl font-bold text-gray-500 ">
-                    Total
-                  </th>
-                  <td className="px-6 py-4 text-xl font-bold text-gray-500">
-                    $1,750.00
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
+          <OrderTotal orderss={orderss} />
           <div className="p-8 pb-16 ">
             <h3 className="pb-16">Payment</h3>
             <button className="flex items-center justify-center bg-primary  w-full   px-10 py-2 text-black hover:text-white">
@@ -157,4 +120,71 @@ function Checkout() {
     </div>
   );
 }
+
+const OrderTotal = ({ orderss }) => {
+  const formatNumber = (number) => {
+    return number.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+    });
+  };
+  const total = formatNumber(
+    orderss.reduce((acc, curr) => {
+      acc += curr.price * curr.quantity;
+      return acc;
+    }, 0)
+  );
+  return (
+    <div className=" bg-white px-6 py-8  ">
+      <h3 className="pb-4">Your order</h3>
+      <table className="w-5/6 text-sm text-left border rounded-t-lg">
+        <thead className="text-md font-medium text-gray-400 ">
+          <tr>
+            <th className="px-6 py-3">Product</th>
+            <th className="px-6 py-3">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orderss &&
+            orderss.map((order) => {
+              return <OrderTotalItem key={order.id} order={order} />;
+            })}
+        </tbody>
+        <tfoot>
+          <tr className="border">
+            <th className="px-6 py-4 font-medium text-gray-500 ">Subtotal</th>
+            <td className="px-6 py-4">MAD {total}</td>
+          </tr>
+          <tr className="border">
+            <th className="px-6 py-4 text-xl font-bold text-gray-500 ">
+              Total
+            </th>
+            <td className="px-6 py-4 text-xl font-bold text-gray-500">
+            MAD {total}
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  );
+};
+
+const OrderTotalItem = ({ order }) => {
+  const formatNumber = (number) => {
+    return number.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+    });
+  };
+
+  return (
+    <tr className=" border  ">
+      <th className="px-6 py-4 font-medium text-gray-600 ">
+        {`${order.name} × ${order.quantity}`}
+      </th>
+      <td className="px-6 py-4">
+      MAD {formatNumber(order.price * order.quantity)}
+      </td>
+    </tr>
+  );
+};
+
 export default Checkout;
