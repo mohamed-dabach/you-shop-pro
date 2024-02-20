@@ -2,18 +2,26 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { DECRIMENTACTION, INCREMENTACTION } from "../REDUX/OrdersReducer/ActionsOr";
+// import { useFetch } from "../../server/useFetch";
+// import { FETCHPRODUCT } from "../REDUX/ProductReducer/ActionPr";
+
 
 export default function CardSide({ toggle }) {
   const dispatch = useDispatch();
   const orders = useSelector((store) => store.orders.orders);
-  
-  const [total,setTotal] =useState(0)
+  console.log('from cardside',orders)
+/////////////////////////////////////////////////////////////
 
-const TotalPrices =()=>{
-  const total =0;
-   
-}
-  console.log(orders);
+  // const products = useSelector(state => state.products.products);
+  // console.log('from cardside',products.products)
+  // useFetch()
+// const [items, setItems] = useState('')
+
+ 
+// console.log(items)
+
+///////////////////////////////////////////////////////
+
 
   const [isToggle, setIsToggle] = useState();
 
@@ -48,8 +56,7 @@ const TotalPrices =()=>{
           </div>
 
           <div className="w-full h-[78vh] flex flex-col items-center overflow-x-auto py-6 px-3 relative">
-            {
-              orders && orders.length > 0 ?
+            {orders && orders.length > 0 ?
                orders.map((order) => {
                   return (
                     <div
@@ -119,13 +126,13 @@ const TotalPrices =()=>{
 
      {orders && orders.length > 0 ?
             orders.map((order) => {
-              console.log('orders.length > 0',orders)
+              // console.log('orders.length > 0',orders)
               return (
                 <div>
                 <div className="absolute bottom-36 w-full py-4 px-5 flex justify-between border-t border-b">
                   {/* here will be a state that calculats the total price of all products the client ordered */}
                   <span className="font-bold text-gray-600">Subtotal:</span>
-                  <span className="font-medium text-semi-gray">MAD {total}</span>
+                  <span className="font-medium text-semi-gray">MAD 122</span>
                 </div>
                 <div className="  absolute left-5 bottom-4 right-5 flex flex-col justify-center items-center">
                   <button onClick={CloseCart} className="w-full mb-4 bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">

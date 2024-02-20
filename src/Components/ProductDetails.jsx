@@ -1,160 +1,167 @@
 import { useRef } from "react";
 import { useState } from "react"
 import ProductList from "./ProductList";
-
+import { useParams } from "react-router-dom";
+import {  useDispatch, useSelector } from "react-redux";
+import { useFetch } from "../../server/useFetch";
+import { ADDTOCARTACTION, DECRIMENTACTION, INCREMENTACTION } from "../REDUX/OrdersReducer/ActionsOr";
 
 function ProductDetails() {
-    const list = [
-        {
-            id: 1928,
-            img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/kitchen-island-set-300x300.png",
-            name: "White Kitchen Island",
-            price: "5,350.75",
-            category: "Kitchen",
-        },
-        {
-            id: 2002,
-            img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/working-chair-with-armrest-300x300.png",
-            name: "Beige Working Chair With Armrest",
-            price: "784.00",
-            category: "Home Office",
-        },
-        {
-            id: 3229,
-            img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/king-size-master-bedroom-300x300.png",
-            name: "King Size Master Bedroom",
-            price: "14,500.50",
-            category: "Bedroom",
-        }
-    ];
-    const details = {
-        "id": 1928,
-        "img": "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/kitchen-island-set-300x300.png",
-        "name": "White Kitchen Island",
-        "price": "5,350.75",
-        "category": "Kitchen",
-        "disc": "Habitasse eaque wisi molestie, mollis pharetra convallis exercitation, distinctio eu arcu fugit nibh donec exercitationem, quisque imperdiet mattis proident cupiditate habitant assumenda.",
-        "features": {
-            "text": "Ut at ante diam. Vestibulum tincidunt lacus quis odio iaculis, nec iaculis ipsum hendrerit. Curabitur nec fringilla sem. Nullam at diam et ligula tincidunt luctus. Ut fringilla vitae orci eget suscipit. Etiam ultricies justo ac feugiat dignissim.",
-            "items": [
-                "Etiam eu tortor tempor, malesuada",
-                " Nunc vitae erat sit amet neque varius consequat",
-                "Lorem ipsum dolor sit amet"
-            ]
-        }
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    const orders = useSelector((state) => state.orders.orders)
+    const products = useSelector((state) => state.products.products.products)
+    const details = products?.find((product)=>product.id = id)
+    useFetch()
+  
+    ///// state of count shoued be given from here 
+
+
+    console.log('products', products)
+    console.log('details', details)
+    console.log('orders', orders.count)
+    
+
+
+    
+    const handleAddToCard = () => {
+            if (!details) {
+                return null; 
+            }
+        
+            const needDetails = details ? {
+                id: details.id,
+                img: details.img,
+                name: details.name,
+                price: details.price,
+                category: details.category,
+                // count: quantity
+               
+            } : null;
+        
+            dispatch(ADDTOCARTACTION(needDetails.id, needDetails.img, needDetails.name, needDetails.price, needDetails.category, needDetails.count));
+
+    //    }
+      
     }
-    const [quantity, setQuantity] = useState(1);
+    
+    
+
+    // const [quantity, setQuantity] = useState(1);
     const [switchDescRev, setSwitchDescRev] = useState(true)
     const quantityField = useRef()
 
-    // const dispatch = useDispatch()
-    // const OrderCount = useSelector((store) => store.orders.orders)
-    // console.log('from detais',OrderCount.name)
-    const handleClickQuantity = (event) => {
-        switch (event.target.name) {
-            case "+":
-                setQuantity((prev) => prev + 1);
-                break;
-            case "-":
-                if (quantity <= 1) {
-                    return
-                }
-                else {
-                    setQuantity((prev) => prev - 1);
-                }
-                break;
-            default:
-                console.error('error')
-        }
+    // const handleClickQuantity = (event) => {
+    //     switch (event.target.name) {
+    //         case "+":
+    //             setQuantity((prev) => prev + 1);
+    //             break;
+    //         case "-":
+    //             if (quantity <= 1) {
+    //                 return
+    //             }
+    //             else {
+    //                 setQuantity((prev) => prev - 1);
+    //             }
+    //             break;
+    //         default:
+    //             console.error('error')
+    //     }
 
-    }
-    const handleChangeQuantity = () => {
-        // const newValue = parseInt(quantityField.current.value.replace(/[^0-9]/g,''));
-        const newValue = quantityField.current.value.replace(/[^0-9]/g, '')
-        if (newValue >= 0 || newValue == "") {
-            (newValue == "") ? setQuantity(0) : setQuantity(parseInt(newValue))
-        }
-    }
-    return (
-        <>
+    // }
+
+    // const handleChangeQuantity = () => {
+    //     const newValue = quantityField.current.value.replace(/[^0-9]/g, '')
+    //     if (newValue >= 0 || newValue == "") {
+    //         (newValue == "") ? setQuantity(0) : setQuantity(parseInt(newValue))
+    //     }
+    // }
+  
+  
+    return <>
+         { details &&
             <section className="container mt-10">
-                <div className="p-5 lg:flex block justify-between">
-                    <div className="lg:max-w-[50%] sm:m-auto max-w-[100%] sm:max-w-[70%] p-2 sm:p-10">
-                        <div className="md:p-5">
-                            <img className="h-full w-full lg:hover:scale-[1.2] " src={`${details.img}`} alt={`${details.name}`} />
-                        </div>
-                    </div>
-                    <div className="lg:max-w-[50%] lg:py-5 max-w-[100%] pl-4">
-                        <div className="block py-2  opacity-[0.8] text-xl text-semi-black">
-                            <span >
-                                <a className="text-semi-black" href="#">Home /</a>
-                            </span>
-                            <span>
-                                <a className="text-semi-black mx-1" href="#">{details.category}</a>
-                            </span>
-                            / {details.name}
-                        </div>
-                        <div className=" mt-4 mb-5">
-                            <h1 className="text-[40px] font-bold text-semi-black  leading-1.2">{details.name}</h1>
-                        </div>
-                        <div className="mb-3">
-                            <span className="text-[22px] font-bold opacity-[0.9]">${details.price}</span>
-                            <span className="text-[18px] opacity-[0.9] ml-1">& free shipping</span>
-                        </div>
-                        <div className="mb-3">
-                            <p >{details.disc}</p>
-                        </div>
-                        <div className="block max-w-[300px] sm:flex  p-2">
-                            <div className=" flex">
-                                <span className="border border-r-0 border-opacity-[0.5] border-semi-black">
-                                    <button className="hover:bg-primary w-[40px] h-[40px] " name="-" onClick={() => handleClickQuantity(event)}>-</button>
-                                </span>
-                                <span >
-                                    <input className="w-[40px] h-[42px] text-center text-semi-black border border-semi-black focus:border-dashed  outline-none" type="text" name="quantity" id="quantity" ref={quantityField} onChange={handleChangeQuantity} value={quantity} />
-                                </span>
-                                <span className=" border border-l-0 border-opacity-[0.5] border-semi-black">
-                                    <button className="hover:bg-primary w-[40px] h-[40px]" name="+" onClick={() => handleClickQuantity(event)}>+</button>
-                                </span>
-                            </div>
-                            <div>
-                                <button className="bg-primary px-7 py-3 text-semi-black text-[0.75rem]  mt-3 sm:mt-0 sm:ml-5 hover:text-semi-white font-medium leading-tight uppercase tracking-wider">add to card</button>
-                            </div>
-                        </div>
-                        <div className="mt-2">
-                            <hr />
-                            <div className="mt-2">
-                                <span>
-                                    Category: <a className="text-semi-black hover:text-primary" href="#">{details.category}</a>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="p-5 ">
-                    <hr />
-                    <div className="mt-3 mb-5">
-                        <span onClick={() => setSwitchDescRev(prev => !prev)} className="relative cursor-pointer text-[20px] font-bold">
-                            {switchDescRev ? <span className="absolute rounded top-[-14px] w-[106px] h-[1px] left-0 right-0 bottom-0 bg-semi-black"></span> : <span className="absolute rounded top-[-14px] w-[93px] h-[1px] left-[117px] right-0 bottom-0 bg-semi-black"></span>}
-                            description
-                        </span>
-                        <span onClick={() => setSwitchDescRev(prev => !prev)} className="cursor-pointer min-w-[106px] ml-5 text-[20px] font-bold">
-                            reviews{`(0)`}
-                        </span>
-                    </div>
-                    {
-                        switchDescRev ?
-                            <Description />
-                            :
-                            <Reviews />
-                    }
-                </div>
-                <div className="p-6">
-                    <h1 className="text-[48px] font-bold leading-tight ml-10 mb-5">Related products</h1>
-                    <ProductList list={list} />
-                </div>
-            </section>
+           <div className="p-5 lg:flex block justify-between">
+               <div className="lg:max-w-[50%] sm:m-auto max-w-[100%] sm:max-w-[70%] p-2 sm:p-10">
+                   <div className="md:p-5">
+                   {details && (
+                     <img className="h-full w-full lg:hover:scale-[1.2] " src={`${details.img}`} alt={`${details.name}`} />
+                    )}                       
+                   </div>
+               </div>
+               <div className="lg:max-w-[50%] lg:py-5 max-w-[100%] pl-4">
+                   <div className="block py-2  opacity-[0.8] text-xl text-semi-black">
+                       <span >
+                           <a className="text-semi-black" href="#">Home /</a>
+                       </span>
+                       <span>
+                           <a className="text-semi-black mx-1" href="#">{details.category}</a>
+                       </span>
+                       / {details.name}
+                   </div>
+                   <div className=" mt-4 mb-5">
+                       <h1 className="text-[40px] font-bold text-semi-black  leading-1.2">{details.name}</h1>
+                   </div>
+                   <div className="mb-3">
+                       <span className="text-[22px] font-bold opacity-[0.9]">${details.price}</span>
+                       <span className="text-[18px] opacity-[0.9] ml-1">& free shipping</span>
+                   </div>
+                   <div className="mb-3">
+                       <p >{details.disc}</p>
+                   </div>
+                   <div className="block max-w-[300px] sm:flex  p-2">
+                       <div className=" flex">
+                           <span className="border border-r-0 border-opacity-[0.5] border-semi-black">
+                               <button className="hover:bg-primary w-[40px] h-[40px] " name="-" onClick={()=>{uniqueOrder ? dispatch(DECRIMENTACTION(details.id)) : ''}}>-</button>
+                           </span>
+                           <span >
+                           <input className="w-[40px] h-[42px] text-center text-semi-black border border-semi-black focus:border-dashed  outline-none" type="text" name="quantity" id="quantity" ref={quantityField} value={0} />
+                           </span>
+                           <span className=" border border-l-0 border-opacity-[0.5] border-semi-black">
+                               <button className="hover:bg-primary w-[40px] h-[40px]" name="+" onClick={()=>{uniqueOrder ? dispatch(INCREMENTACTION(details.id)) : ''}} >+</button>
+                           </span>
+                       </div>
+                       <div>
+                           <button className="bg-primary px-7 py-3 text-semi-black text-[0.75rem]  mt-3 sm:mt-0 sm:ml-5 hover:text-semi-white font-medium leading-tight uppercase tracking-wider" onClick={handleAddToCard}>add to card</button>
+                       </div>
+                   </div>
+                   <div className="mt-2">
+                       <hr />
+                       <div className="mt-2">
+                           <span>
+                               Category: <a className="text-semi-black hover:text-primary" href="#">{details.category}</a>
+                           </span>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <div className="p-5 ">
+               <hr />
+               <div className="mt-3 mb-5">
+                   <span onClick={() => setSwitchDescRev(prev => !prev)} className="relative cursor-pointer text-[20px] font-bold">
+                       {switchDescRev ? <span className="absolute rounded top-[-14px] w-[106px] h-[1px] left-0 right-0 bottom-0 bg-semi-black"></span> : <span className="absolute rounded top-[-14px] w-[93px] h-[1px] left-[117px] right-0 bottom-0 bg-semi-black"></span>}
+                       description
+                   </span>
+                   <span onClick={() => setSwitchDescRev(prev => !prev)} className="cursor-pointer min-w-[106px] ml-5 text-[20px] font-bold">
+                       reviews{`(0)`}
+                   </span>
+               </div>
+               {
+                   switchDescRev ?
+                       <Description />
+                       :
+                       <Reviews />
+               }
+           </div>
+           <div className="p-6">
+               <h1 className="text-[48px] font-bold leading-tight ml-10 mb-5">Related products</h1>
+               <ProductList />
+           </div>
+       </section>
+
+        
+        }
         </>
-    )
 
 
     function Description() {
@@ -169,14 +176,12 @@ function ProductDetails() {
                             </div>
                             <div>
                                 <ul>
-                                    {details.features.items.map((item,index) => {
-                                        return <div key={index} className="flex mb-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#edb932" className="bi bi-check2" viewBox="0 0 16 16">
+                                         <div  className=" flex mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" className="bi bi-check2 font-bold" viewBox="0 0 16 16">
                                                 <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" />
                                             </svg>
-                                            <li className="ml-4">{item}</li>
+                                            <li className="ml-4">{details.features.items}</li>
                                         </div>
-                                    })}
                                 </ul>
                             </div>
                         </div>
@@ -188,15 +193,13 @@ function ProductDetails() {
                                 <p className="mb-5">{details.features.text}</p>
                             </div>
                             <div>
-                                <ul>
-                                    {details.features.items.map((item,index) => {
-                                        return <div key={index}  className="flex mb-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#edb932" className="bi bi-check2" viewBox="0 0 16 16">
+                                <ul >
+                                         <div  className="  flex mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" className="bi bi-check2 " viewBox="0 0 16 16">
                                                 <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" />
                                             </svg>
-                                            <li  className="ml-4">{item}</li>
+                                            <li className="ml-4">{details.features.items}</li>
                                         </div>
-                                    })}
                                 </ul>
                             </div>
                         </div>
@@ -232,7 +235,7 @@ function ProductDetails() {
                     </div>
                     <div>
                         <div className="border p-8">
-                            <span className="text-semi-black  text-[23px] opacity-[0.8] leading-5 font-medium">Be the first to review “Blue Comfy Fabric Chair”</span>
+                            <span className="text-semi-black  text-[23px] opacity-[0.8] leading-5 font-medium">Be the first to review “{details.name}”</span>
                             <form className="mt-3" action="">
                                 <p className="mb-5">
                                     <span >Your email address will not be published. Required fields are marked *</span>
@@ -243,7 +246,7 @@ function ProductDetails() {
                                         <div className="flex items-center p-[4px]">
                                             {/* Rating Stars */}
                                             <div className="flex">
-                                                {[...Array(5)].map((_,index) => {
+                                                {[...Array(5)].map((_, index) => {
                                                     const starValue = index + 1;
                                                     return (
                                                         <label

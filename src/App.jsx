@@ -11,9 +11,11 @@ import ProductDetails from "./Components/ProductDetails";
 import ViewCarT from "./Components/View_CarT";
 import Checkout from "./Components/Checkout";
 
+
 function App() {
   return (
-    <>
+
+    
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -28,8 +30,7 @@ function App() {
               path="/product/:id"
               element={
                 <>
-                  {" "}
-                  <ProductDetails />
+                  <ProductDetails/>
                 </>
               }
             />
@@ -43,7 +44,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    
   );
 }
 export default App;
