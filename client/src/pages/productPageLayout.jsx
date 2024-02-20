@@ -1,8 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import ProductList from "../Components/ProductList";
 import SideProductFilters from "../Components/SideProductFilter";
-import { useEffect, useState } from "react";
-// import { BASE_URL } from "../constants";
+import { useEffect, useRef, useState } from "react";
 import useFetch from "../hocks/useFetch";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -37,7 +36,7 @@ export default function Products() {
   const categorys = data?.products.reduce((acc, curr) => {
     if (!acc[curr.category]) {
       acc[curr.category] = 1;
-  } else {
+    } else {
       acc[curr.category]++;
     }
     return acc;
@@ -61,6 +60,21 @@ export default function Products() {
   function handleToggleFilters() {
     setShowFilters((prev) => !prev);
   }
+
+  const [filter, setFilter] = useState("");
+  const [filterdProducts, setFilterdProducts] = useState(productss);
+
+  useEffect(() => {
+    setFilterdProducts((prev) => {
+      if (filter === "low_to_high") {
+        return [...productss].sort((a, b) => a.price - b.price);
+      } else if (filter === "high_to_low") {
+        return [...productss].sort((a, b) => b.price - a.price);
+      } else {
+        return productss;
+      }
+    });
+  }, [filter, productss]);
 
   return (
     <>
@@ -93,13 +107,18 @@ export default function Products() {
             </div>
             <div className="">
               <form className="">
-                <select className=" border px-2 py-1" defaultValue={""}>
+                <select
+                  className=" border px-2 py-1"
+                  onChange={(e) => setFilter(e.target.value)}
+                >
                   <option value="">Default sorting</option>
-                  <option value="popularity">Sort by popularity</option>
-                  <option value="rating">Sort by average rating</option>
-                  <option value="date">Sort by latest</option>
-                  <option value="price">Sort by price: low to high</option>
-                  <option value="price-desc">Sort by price: high to low</option>
+
+                  <option value="low_to_high">
+                    Sort by price: low to high
+                  </option>
+                  <option value="high_to_low">
+                    Sort by price: high to low
+                  </option>
                 </select>
               </form>
             </div>
@@ -111,7 +130,7 @@ export default function Products() {
             <p className="m-3 text-red-500">{error}</p>
           ) : (
             <>
-              <ProductList list={productss} />
+              <ProductList list={filterdProducts} />
               <p className="text-center px-3 py-1 w-fit m-auto my-5 border-semi-gray border">
                 No more products to show
               </p>

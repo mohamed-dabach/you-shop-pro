@@ -61,6 +61,10 @@ const cardRedcure = (state = initialValue, action) => {
       );
       return { ...state, orders: [...newOrdersList] };
     }
+
+    case "set_orders":
+      return { ...state, orders: action.payload };
+
     default:
       return state;
   }
@@ -91,4 +95,10 @@ export const updateOrderByValue = (payload) => ({
   type: "update_order_by_value",
   payload,
 });
+
+export const setOrders = (payload) => ({
+  type: "set_orders",
+  payload,
+});
+
 export default cardRedcure;

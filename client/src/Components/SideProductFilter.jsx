@@ -52,7 +52,7 @@ const SideProductFilters = ({ handleToggleFilters }) => {
       .catch((err) => console.log(err));
     setIsSearch(false);
   }, [isSearch, setIsSearch, dispatch, search]);
-  console.log(categories);
+  // console.log(categories);
   //////
 
   return (
@@ -136,7 +136,7 @@ const SideProductFilters = ({ handleToggleFilters }) => {
 };
 
 const CategoryItem = ({ item, handleToggleFilters }) => {
-  console.log(item);
+  // console.log(item);
   return (
     <>
       <li className=" flex justify-between ">
