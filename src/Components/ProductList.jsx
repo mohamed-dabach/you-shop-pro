@@ -13,10 +13,11 @@ export default function ProductList({ list }){
         })}
     </ul>
   );
-};
+}
 
 const ItemProduct = ({ product }) => {
   const handleAddToCart = () => {
+    
     console.log("add to cart");
   };
   return (

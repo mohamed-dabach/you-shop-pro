@@ -2,10 +2,10 @@ import { Outlet } from "react-router-dom";
 import NavBar from "../Components/NavBar";
 import CardSide from "../Components/CardSide";
 import { useState } from "react";
-import { createStore } from "redux";
 
+
+import store from "../reducers/store";
 import { Provider } from "react-redux";
-import { reducer } from "../reducers/commandReducer";
 import Footer from "../Components/footer";
 
 const Layout = () => {
@@ -16,7 +16,10 @@ const Layout = () => {
     console.log(toggle);
   };
 
-  const store = createStore(reducer);
+  // const store = createStore(reducer);
+  // const store =configureStore({
+
+  // })
 
   return (
     <>

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { updateCommands } from "../reducers/commandSlice";
+import PropTypes from 'prop-types';
 export default function CardSide({ toggle }) {
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders);
+  const orders = useSelector((state) => state.commend.commend);
 
   console.log(orders);
 
@@ -84,10 +85,7 @@ export default function CardSide({ toggle }) {
                             <button
                               className="px-3 py-2 border"
                               onClick={() => {
-                                dispatch({
-                                  type: "update_product",
-                                  payload: { id: order.id, type: "dec" },
-                                });
+                                dispatch(updateCommands(order));
                               }}                            >
                               -
                             </button>
@@ -97,10 +95,7 @@ export default function CardSide({ toggle }) {
                             <button
                               className="px-3 py-2 border"
                               onClick={() => {
-                                dispatch({
-                                  type: "update_product",
-                                  payload: { id: order.id, type: "inc" },
-                                });
+                                dispatch(updateCommands(order));
                               }}
                             >
                               +
@@ -123,7 +118,7 @@ export default function CardSide({ toggle }) {
      {orders && orders.length > 0 ?
             orders.map((order) => {
               return (
-                <div>
+                <>
                 <div className="absolute bottom-36 w-full py-4 px-5 flex justify-between border-t border-b">
                   {/* here will be a state that calculats the total price of all products the client ordered */}
                   <span className="font-bold text-gray-600">Subtotal:</span>
@@ -137,7 +132,7 @@ export default function CardSide({ toggle }) {
                     <Link to={"/"}></Link>CHECKOUT
                   </button>
                 </div>
-              </div>
+              </>
               );
             })
             :
@@ -164,4 +159,6 @@ export default function CardSide({ toggle }) {
 
 
  
-
+CardSide.propTypes ={
+  toggle:  PropTypes.bool
+}
