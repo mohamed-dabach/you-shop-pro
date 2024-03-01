@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { updateCommands } from "../reducers/commandSlice";
+import { IncCommands,DecCommands,deleteCommands } from "../reducers/commandSlice";
 import PropTypes from 'prop-types';
 export default function CardSide({ toggle }) {
   const dispatch = useDispatch();
@@ -17,6 +17,11 @@ export default function CardSide({ toggle }) {
 
   const CloseCart = () => {
     setIsToggle(false);
+  };
+  const calculateTotalPrice = () => {
+    // Assuming each order has a 'price' property
+    const totalPrice = orders.reduce((acc, order) => acc + parseInt(order.price), 0);
+    return totalPrice;
   };
 
   if (isToggle) {
@@ -52,19 +57,20 @@ export default function CardSide({ toggle }) {
                     >
                       <div className="w-2/12 h-20 flex justify-center items-center bg-slate-100 mr-1">
                         {/* product's img */}
-                        <img src="" alt="img" />
+                        <img src={order.img} alt="img" />
                       </div>
 
                       <div className="w-10/12 flex flex-col justify-between items-center">
                         <div className=" w-full px-2 flex justify-between mb-2">
                           <div className="font-bold text-gray-700">
                             {/* product's title */}
-                            {order.title}
+                            {order.name}
                           </div>
                           <div
-                            // onClick={() => {
-                            //   dispatch();
-                            // }}
+                            onClick={() => {
+                              dispatch(deleteCommands(order.id))
+                              // console.log(order);
+                            }}
                             className="cursor-pointer"
                           >
                             <svg
@@ -85,7 +91,7 @@ export default function CardSide({ toggle }) {
                             <button
                               className="px-3 py-2 border"
                               onClick={() => {
-                                dispatch(updateCommands(order));
+                                dispatch(DecCommands(order));
                               }}                            >
                               -
                             </button>
@@ -94,9 +100,11 @@ export default function CardSide({ toggle }) {
                             </span>
                             <button
                               className="px-3 py-2 border"
-                              onClick={() => {
-                                dispatch(updateCommands(order));
-                              }}
+                              onClick={
+                                () => {
+                                dispatch(IncCommands(order));
+                              }
+                            }
                             >
                               +
                             </button>
@@ -119,10 +127,10 @@ export default function CardSide({ toggle }) {
             orders.map((order) => {
               return (
                 <>
-                <div className="absolute bottom-36 w-full py-4 px-5 flex justify-between border-t border-b">
+                <div key={order.id} className="absolute bottom-36 w-full py-4 px-5 flex justify-between border-t border-b">
                   {/* here will be a state that calculats the total price of all products the client ordered */}
                   <span className="font-bold text-gray-600">Subtotal:</span>
-                  <span className="font-medium text-semi-gray">MAD 231</span>
+                  <span className="font-medium text-semi-gray">{calculateTotalPrice()}$</span>
                 </div>
                 <div className="  absolute left-5 bottom-4 right-5 flex flex-col justify-center items-center">
                   <button className="w-full mb-4 bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">

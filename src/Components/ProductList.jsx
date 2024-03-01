@@ -1,9 +1,12 @@
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { addToCart } from "../reducers/commandSlice";
 
 // give it array of products check /data/db.json
 
 export default function ProductList({ list }){
+
 
   return (
     <ul className="grid grid-cols-2 max-[500px]:grid-cols-1  gap-2 md:grid-cols-3 lg:grid-cols-4">
@@ -16,9 +19,11 @@ export default function ProductList({ list }){
 }
 
 const ItemProduct = ({ product }) => {
+  const dispatch=useDispatch()
+  
   const handleAddToCart = () => {
-    
-    console.log("add to cart");
+    dispatch(addToCart(product))
+    console.log(product);
   };
   return (
     <li className="p-1 relative  group  border text-center">

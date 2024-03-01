@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import { useState } from "react"
 import ProductList from "./ProductList";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../reducers/commandSlice";
 
 function ProductDetails() {
     const list = [
@@ -8,7 +10,7 @@ function ProductDetails() {
             id: 1928,
             img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/kitchen-island-set-300x300.png",
             name: "White Kitchen Island",
-            price: "5,350.75",
+            price: "5350.75",
             category: "Kitchen",
         },
         {
@@ -22,7 +24,7 @@ function ProductDetails() {
             id: 3229,
             img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/king-size-master-bedroom-300x300.png",
             name: "King Size Master Bedroom",
-            price: "14,500.50",
+            price: "14500.50",
             category: "Bedroom",
         }
     ];
@@ -70,6 +72,7 @@ function ProductDetails() {
             (newValue == "") ? setQuantity(0) : setQuantity(parseInt(newValue))
         }
     }
+    const dispatch = useDispatch();
     return (
         <>
             <section className="container mt-10">
@@ -112,7 +115,9 @@ function ProductDetails() {
                                 </span>
                             </div>
                             <div>
-                                <button className="bg-primary px-7 py-3 text-semi-black text-[0.75rem]  mt-3 sm:mt-0 sm:ml-5 hover:text-semi-white font-medium leading-tight uppercase tracking-wider">add to card</button>
+                                <button onClick={()=>{
+                                    dispatch(addToCart(details))
+                                }} className="bg-primary px-7 py-3 text-semi-black text-[0.75rem]  mt-3 sm:mt-0 sm:ml-5 hover:text-semi-white font-medium leading-tight uppercase tracking-wider">add to card</button>
                             </div>
                         </div>
                         <div className="mt-2">

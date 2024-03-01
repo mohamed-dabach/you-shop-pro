@@ -5,48 +5,75 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-  commend: [
-    { id: 123, title: "wooden stool", price: 50, count: 3 },
-    { id: 122, title: "green bedroom swof ", price: 100, count: 1 },
-  ],
+  commend: [],
 };
 
 const commandSlice=createSlice({
   name:'commend',
   initialState,
   reducers:{
-    updateCommands:{
-      prepare(id,type,price,count){
+    
+    IncCommands:{
+      prepare(order){
         return{
-           payload:{id,type,price,count}
+           payload:{order}
         }
       },
-      reducer(state,action){
-        const updatedCmmands = state.commend.map((order)=>{
-          if(order.id === action.payload.id){
-            if(action.payload.type === 'inc'){
-              return {...order,count:++order.count}
-            }else if(action.payload.type === 'dec'){
-              return{...order,count:--order.count}
-            }else{
-              return order;
-            }
+      reducer(state, action) {
+        const updatedCommands = state.commend.map((order) => {
+          if (order.id === action.payload.order.id) {
+            const newCount = order.count + 1;
+            return { ...order, count: newCount };
           }
-        })
-        return {...state,orders:updatedCmmands}
+          
+          return order;
+        });
+        return { ...state, commend: updatedCommands };
+      },
+    },
+    DecCommands:{
+      prepare(order){
+        return{
+           payload:{order}
+        }
+      },
+      reducer(state, action) {
+        const updatedCommands = state.commend.map((order) => {
+          if (order.id === action.payload.order.id) {
+            const newCount = Math.max(0, order.count - 1);
+            return { ...order, count: newCount };
+          }
+          return order;
+        });
+        return { ...state, commend: updatedCommands };
+      },
+    },
+    
+    deleteCommands(state,action){
+        state.commend=state.commend.filter((order)=>
+           order.id !== action.payload
+        )
+    },
+    
+    addToCart(state, action) {
+      const productList = state.commend.find((order) => order.id === action.payload.id);
+
+      if (productList) {
+        state.commend = state.commend.map((order) =>
+          order.id === action.payload.id ? { ...order, count: ++order.count } : order
+        );
+      } else {
+        state.commend = [...state.commend, { ...action.payload, count: 1 }];
       }
-    }
-  },
+    },
+    //
 
-  addCommands(state,action){
-     
-  },
-  deleteCommands(){
-
+ 
+   
   }
 })
 
-export const {updateCommands}=commandSlice.actions
+export const {IncCommands,DecCommands,deleteCommands,addToCart}=commandSlice.actions
 
 export default commandSlice.reducer
 

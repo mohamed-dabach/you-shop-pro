@@ -6,7 +6,7 @@ const RoomComponent = ({ room }) => {
       id: 1928,
       img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/kitchen-island-set-300x300.png",
       name: "White Kitchen Island",
-      price: "5,350.75",
+      price: "5350.75",
       category: "Kitchen",
     },
     {
@@ -20,14 +20,14 @@ const RoomComponent = ({ room }) => {
       id: 3229,
       img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/king-size-master-bedroom-300x300.png",
       name: "King Size Master Bedroom",
-      price: "14,500.50",
+      price: "14500.50",
       category: "Bedroom",
     },
     {
       id: 9735,
       img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/cream-ceramic-oval-bathtub-300x300.png",
       name: "Ceramic Oval Bathtub",
-      price: "11,200.00",
+      price: "11200.00",
       category: "Bathroom",
     },
   ];

@@ -6,7 +6,7 @@ export default function NewCollection() {
       id: 9735,
       img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/cream-ceramic-oval-bathtub-300x300.png",
       name: "Ceramic Oval Bathtub",
-      price: "11,200.00",
+      price: "11200.00",
       category: "Bathroom",
     },
     {
@@ -20,7 +20,7 @@ export default function NewCollection() {
       id: 7098,
       img: "https://websitedemos.net/home-decor-04/wp-content/uploads/sites/644/2020/08/living-room-green-sofa-300x300.png",
       name: "Green Living Room Sofa",
-      price: "1,840.00",
+      price: "1840.00",
       category: "Living Room",
     },
     {
