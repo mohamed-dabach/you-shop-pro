@@ -1,10 +1,11 @@
 const Product = require("../modules/product");
 const AppError = require("../utils/AppError");
-const productArray = require("../../data/db");
+const productArray = require("../data/db");
 
 exports.getProducts = async (req, res, next) => {
   try {
     const fields = req.query.fields?.split(",").join(" ") ?? {};
+    console.log(req.query);
 
     const excludeKeys = ["sort", "fields", "limit", "page"];
     let queryString = { ...req.query };
