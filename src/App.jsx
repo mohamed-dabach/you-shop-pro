@@ -17,7 +17,7 @@ function App() {
 
     
       <BrowserRouter>
-        <Routes>
+        <Routes>  
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="products" element={<ProductPageLayout />}>
@@ -26,14 +26,8 @@ function App() {
                 element={<CategoryPageHeader />}
               />
             </Route>
-            <Route
-              path="/product/:id"
-              element={
-                <>
-                  <ProductDetails/>
-                </>
-              }
-            />
+
+            <Route  path="/product/:id"  element={<ProductDetails/>} />
             <Route path="rooms" element={<Rooms />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
@@ -41,7 +35,9 @@ function App() {
             <Route path="checkout" element={<Checkout />} />
 
             <Route path="*" element={<>check your link 404 route</>} />
+
           </Route>
+
         </Routes>
       </BrowserRouter>
     

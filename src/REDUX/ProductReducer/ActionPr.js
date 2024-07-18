@@ -1,18 +1,18 @@
 
-export const FETCH_PTODUCTS = 'FETCH_PTODUCTS'
-export const FETCH_CATEGORIES = 'FETCH_CATEGORIES'
+export const SET_PRODUCT = 'SET_PRODUCT'
+export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 
-export const FETCHPRODUCT = (data) => {
+export const SETPRODUCT = (data) => {
    return {
-    type: FETCH_PTODUCTS,
-    payload:{data}
+    type: SET_PRODUCT,
+    payload:data
    }
 }
 
-export const FETCHCATEGORIES = () => {
+export const DELETEPRODUCT = (id) => {
     return {
-     type: FETCH_CATEGORIES,
-     payload:{category,count}
+     type: DELETE_PRODUCT,
+     payload:id
     }
  }
 

@@ -1,20 +1,21 @@
-import { useRef } from "react";
-import { useState } from "react"
+import { useEffect, useInsertionEffect, useState } from "react"
 import ProductList from "./ProductList";
 import { useParams } from "react-router-dom";
 import {  useDispatch, useSelector } from "react-redux";
 import { useFetch } from "../../server/useFetch";
-import { ADDTOCARTACTION, DECRIMENTACTION, INCREMENTACTION } from "../REDUX/OrdersReducer/ActionsOr";
+import { ADDTOCART, UPDATECOUNTORDER } from "../REDUX/OrdersReducer/ActionsOr";
 
 function ProductDetails() {
     const { id } = useParams();
     const dispatch = useDispatch();
     const orders = useSelector((state) => state.orders.orders)
     const products = useSelector((state) => state.products.products.products)
-    const details = products?.find((product)=>product.id = id)
+    const details = products?.find((product)=>product.id === id)
     useFetch()
   
-    ///// state of count shoued be given from here 
+    const [quantity, setQuantity] = useState(1);
+    const [switchDescRev, setSwitchDescRev] = useState(true)
+
 
 
     console.log('products', products)
@@ -28,54 +29,49 @@ function ProductDetails() {
             if (!details) {
                 return null; 
             }
-        
-            const needDetails = details ? {
-                id: details.id,
-                img: details.img,
-                name: details.name,
-                price: details.price,
-                category: details.category,
-                // count: quantity
-               
-            } : null;
-        
-            dispatch(ADDTOCARTACTION(needDetails.id, needDetails.img, needDetails.name, needDetails.price, needDetails.category, needDetails.count));
+          const CheckIfOrderExists = orders.find((order) =>  order.id === id)
+          if(CheckIfOrderExists) {
+            dispatch(UPDATECOUNTORDER(id, quantity))
+          } else {
+            dispatch(ADDTOCART(details, quantity));
+          } 
 
-    //    }
-      
     }
     
     
+    useEffect(() => {
+        const existingOrder = orders.find((order) => order.id === id);
+        if (existingOrder) {
+          setQuantity(existingOrder.count);
+        }
+      }, [id, orders]);
+      
 
-    // const [quantity, setQuantity] = useState(1);
-    const [switchDescRev, setSwitchDescRev] = useState(true)
-    const quantityField = useRef()
+    const handleClickQuantity = (event) => {
+        switch (event.target.name) {
+            case "+":
+                setQuantity((prev) => prev + 1);
+                break;
+            case "-":
+                if (quantity <= 1) {
+                    return
+                }
+                else {
+                    setQuantity((prev) => prev - 1);
+                }
+                break;
+            default:
+                console.error('error')
+        }
+    }
 
-    // const handleClickQuantity = (event) => {
-    //     switch (event.target.name) {
-    //         case "+":
-    //             setQuantity((prev) => prev + 1);
-    //             break;
-    //         case "-":
-    //             if (quantity <= 1) {
-    //                 return
-    //             }
-    //             else {
-    //                 setQuantity((prev) => prev - 1);
-    //             }
-    //             break;
-    //         default:
-    //             console.error('error')
-    //     }
 
-    // }
-
-    // const handleChangeQuantity = () => {
-    //     const newValue = quantityField.current.value.replace(/[^0-9]/g, '')
-    //     if (newValue >= 0 || newValue == "") {
-    //         (newValue == "") ? setQuantity(0) : setQuantity(parseInt(newValue))
-    //     }
-    // }
+    const handleChangeQuantity = () => {
+        const newValue = quantityField.current.value.replace(/[^0-9]/g, '')
+        if (newValue >= 0 || newValue == "") {
+            (newValue == "") ? setQuantity(0) : setQuantity(parseInt(newValue))
+        }
+    }
   
   
     return <>
@@ -84,20 +80,20 @@ function ProductDetails() {
            <div className="p-5 lg:flex block justify-between">
                <div className="lg:max-w-[50%] sm:m-auto max-w-[100%] sm:max-w-[70%] p-2 sm:p-10">
                    <div className="md:p-5">
-                   {details && (
-                     <img className="h-full w-full lg:hover:scale-[1.2] " src={`${details.img}`} alt={`${details.name}`} />
+                     {details && (
+                     <img className="h-full w-full lg:hover:scale-[1.2] " src={details.img} alt={details.name} />
                     )}                       
                    </div>
                </div>
                <div className="lg:max-w-[50%] lg:py-5 max-w-[100%] pl-4">
                    <div className="block py-2  opacity-[0.8] text-xl text-semi-black">
                        <span >
-                           <a className="text-semi-black" href="#">Home /</a>
+                           <a className="text-semi-black" href="#">Home </a>
                        </span>
                        <span>
                            <a className="text-semi-black mx-1" href="#">{details.category}</a>
                        </span>
-                       / {details.name}
+                       {details.name}
                    </div>
                    <div className=" mt-4 mb-5">
                        <h1 className="text-[40px] font-bold text-semi-black  leading-1.2">{details.name}</h1>
@@ -112,13 +108,13 @@ function ProductDetails() {
                    <div className="block max-w-[300px] sm:flex  p-2">
                        <div className=" flex">
                            <span className="border border-r-0 border-opacity-[0.5] border-semi-black">
-                               <button className="hover:bg-primary w-[40px] h-[40px] " name="-" onClick={()=>{uniqueOrder ? dispatch(DECRIMENTACTION(details.id)) : ''}}>-</button>
+                               <button className="hover:bg-primary w-[40px] h-[40px] " onClick={handleClickQuantity} name="-" >-</button>
                            </span>
                            <span >
-                           <input className="w-[40px] h-[42px] text-center text-semi-black border border-semi-black focus:border-dashed  outline-none" type="text" name="quantity" id="quantity" ref={quantityField} value={0} />
+                           <input onChange={handleChangeQuantity} className="w-[40px] h-[42px] text-center text-semi-black border border-semi-black focus:border-dashed  outline-none" type="text" name="quantity" id="quantity"  value={quantity} />
                            </span>
                            <span className=" border border-l-0 border-opacity-[0.5] border-semi-black">
-                               <button className="hover:bg-primary w-[40px] h-[40px]" name="+" onClick={()=>{uniqueOrder ? dispatch(INCREMENTACTION(details.id)) : ''}} >+</button>
+                               <button className="hover:bg-primary w-[40px] h-[40px]" onClick={handleClickQuantity} name="+" >+</button>
                            </span>
                        </div>
                        <div>

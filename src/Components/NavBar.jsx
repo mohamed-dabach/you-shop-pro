@@ -4,12 +4,15 @@ import darklogo from "../Assets/kayuu-Logo-dark.svg";
 import whitelogo from "../Assets/kayuu-Logo-white.svg";
 import PropTypes from "prop-types";
 import NavLinkItem from "./navLinkItem";
+import { useSelector } from "react-redux";
 
 const NavBar = ({ handleClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const [url, setUrl] = useState(location.pathname);
   const [isTrensparent, setIsTransparent] = useState(false);
+  const orders = useSelector((state) => state.orders.orders)
+
   useEffect(() => {
     setUrl(location.pathname);
     if (url === "/") {
@@ -98,7 +101,7 @@ const NavBar = ({ handleClick }) => {
                 className={`absolute  font-semibold top-[-5px] left-[-10px] flex justify-center items-center p-0 m-0 w-5 h-5 text-[12px] rounded-2xl 
                   text-semi-black bg-primary`}
               >
-                22
+                {orders.length}
               </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

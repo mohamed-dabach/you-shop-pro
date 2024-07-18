@@ -133,7 +133,7 @@ export default function Footer() {
               Copyright © 2024 Online Furniture Store
             </div>
             <div className="w-full text-center lg:w-3/12 xl:2/12 mb-12">
-              Powered by Online Furniture Store
+              Developped by Online <span className="cursor-pointer hover:text-white underline ">Abde29_ouaaddi</span>
             </div>
           </div>
         </div>

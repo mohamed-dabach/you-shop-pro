@@ -1,15 +1,30 @@
 // import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { useFetch } from "../../server/useFetch";
+import { ADDTOCART } from "../REDUX/OrdersReducer/ActionsOr";
 
 // give it array of products check /data/db.json
 
 export default function ProductList(){
-
-  const list = useSelector((state) => state.products.products.products);
   useFetch()
+  const list = useSelector((state) => state.products.products.products);
+  const orders = useSelector((state) => state.orders.orders);
+
   console.log('from productList', useSelector((store) => store));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const HandleAddToCart = (id) => {
+    const order = orders.find((item) => item.id === id);
+    if (order) {
+      navigate(`/product/${id}`);
+    } else {
+      const product = list.find((item) => item.id === id)
+      dispatch(ADDTOCART(product, 1));
+    }
+  };
+
 
   return (
 
@@ -18,7 +33,7 @@ export default function ProductList(){
       { list && list.map((item) => {
          return  ( <li key={item.id} className="p-1 relative  group  border text-center">
                     <div
-                      // onClick={handleAddToCart}
+                      onClick={() => HandleAddToCart(item.id)}
                       className="hidden group absolute hover:shadow-md  cursor-pointer shadow-lg w-8 h-8 group-hover:grid  place-content-center rounded-full right-5 top-5 z-50"
                     >
                       <svg

@@ -1,16 +1,22 @@
-import { FETCH_PTODUCTS } from "./ActionPr";
+import { DELETE_PRODUCT, SET_PRODUCT } from "./ActionPr";
 
 const initialValues = {
-    products:[]
+    products:[],
 };
 
 export const ProductReducer = (state = initialValues , action) => {
 
  switch(action.type){
-        case FETCH_PTODUCTS: 
-        return {...state, 
-                 products:action.payload.data
-              };
+        case SET_PRODUCT: 
+          return {...state, products:action.payload };
+
+          
+        case DELETE_PRODUCT:
+            return {
+                ...state, products:[ ...state.products.filter((product) => {
+                    return product.id !== action.payload
+                })]
+            }
 
         default:
             return state;

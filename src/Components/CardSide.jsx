@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { DECRIMENTACTION, INCREMENTACTION } from "../REDUX/OrdersReducer/ActionsOr";
+import { DECRIMENTACTION, INCREMENTACTION, REMOVEORDER } from "../REDUX/OrdersReducer/ActionsOr";
 // import { useFetch } from "../../server/useFetch";
 // import { FETCHPRODUCT } from "../REDUX/ProductReducer/ActionPr";
 
@@ -9,19 +9,9 @@ import { DECRIMENTACTION, INCREMENTACTION } from "../REDUX/OrdersReducer/Actions
 export default function CardSide({ toggle }) {
   const dispatch = useDispatch();
   const orders = useSelector((store) => store.orders.orders);
-  console.log('from cardside',orders)
-/////////////////////////////////////////////////////////////
+  console.log('FROM CARDSIDE',orders)
 
-  // const products = useSelector(state => state.products.products);
-  // console.log('from cardside',products.products)
-  // useFetch()
-// const [items, setItems] = useState('')
-
- 
-// console.log(items)
-
-///////////////////////////////////////////////////////
-
+//////////////////////////////////////////
 
   const [isToggle, setIsToggle] = useState();
 
@@ -34,10 +24,10 @@ export default function CardSide({ toggle }) {
   };
 
   if (isToggle) {
+
     return (
       <>
-
-        <div className="bg-white z-[999999] shadow-md h-screen w-full lg:w-5/12 xl:w-5/12 md:w-8/12 fixed top-0 right-0">
+        <div className="bg-white z-[999999] shadow-md h-screen w-full lg:w-5/12 xl:w-5/12 md:w-8/12 fixed top-0 right-0 ">
 
           <div className="w-full h-16 flex justify-between items-center px-6 border-b">
             <div className="text-semi-black font-medium">Shopping Cart</div>
@@ -55,29 +45,29 @@ export default function CardSide({ toggle }) {
             </div>
           </div>
 
-          <div className="w-full h-[78vh] flex flex-col items-center overflow-x-auto py-6 px-3 relative">
+          <div className="w-full h-[58vh] flex flex-col items-center overflow-x-auto py-3 px-3 relative">
             {orders && orders.length > 0 ?
                orders.map((order) => {
                   return (
                     <div
                       key={order.id}
-                      className="p-2 mb-2 border w-full h-auto flex justify-between items-center shadow-lg"
+                      className="p-2 mb-3  border w-full h-auto flex justify-between items-center shadow hover:bg-gray-50"
                     >
                       <div className="w-2/12 h-20 flex justify-center items-center bg-slate-100 mr-1">
                         {/* product's img */}
-                        <img src="" alt="img" />
+                        <img src={order.img} alt={order.name} />
                       </div>
 
                       <div className="w-10/12 flex flex-col justify-between items-center">
                         <div className=" w-full px-2 flex justify-between mb-2">
-                          <div className="font-bold text-gray-700">
+                          <div className="font-bold text-gray-700 hover:text-primary hover:underline">
                             {/* product's title */}
-                            {order.name}
+                            <Link onClick={() => CloseCart()} to={`/product/${order.id}`}>{order.name}</Link>
                           </div>
                           <div
-                            // onClick={() => {
-                            //   dispatch();
-                            // }}
+                            onClick={() => {
+                              dispatch(REMOVEORDER(order.id));
+                            }}
                             className="cursor-pointer"
                           >
                             <svg
@@ -120,30 +110,35 @@ export default function CardSide({ toggle }) {
                 })
               :
               
-               <span className="text-gray-400 font-medium absolute left-32 top-52 ">No products in the cart</span>
+               <span className="text-gray-400 font-medium absolute left-32 top-52  ">No products in the cart</span>
             }
           </div>
 
      {orders && orders.length > 0 ?
             orders.map((order) => {
               // console.log('orders.length > 0',orders)
-              return (
+              return <>
                 <div>
                 <div className="absolute bottom-36 w-full py-4 px-5 flex justify-between border-t border-b">
                   {/* here will be a state that calculats the total price of all products the client ordered */}
                   <span className="font-bold text-gray-600">Subtotal:</span>
                   <span className="font-medium text-semi-gray">MAD 122</span>
                 </div>
-                <div className="  absolute left-5 bottom-4 right-5 flex flex-col justify-center items-center">
+                <div className=" absolute left-5 bottom-4 right-5 flex flex-col justify-center items-center">
+                <Link className="w-full" to={"ViewCarT"}>
                   <button onClick={CloseCart} className="w-full mb-4 bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
-                    <Link to={"ViewCarT"}>VIEW CART</Link>
+                    VIEW CART
                   </button>
-                  <button onClick={CloseCart} className="w-full bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
-                    <Link to={"/"}></Link>CHECKOUT
-                  </button>
+                </Link>
+
+                  <Link className="w-full" to={"/checkout"}>
+                    <button onClick={CloseCart} className="w-full bg-primary text-semi-black flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">
+                       CHECKOUT
+                    </button>
+                  </Link>
                 </div>
               </div>
-              );
+              </>
             })
             :
             <button className=" absolute left-6 bottom-4 right-6 bg-primary flex justify-center p-3 text-sm font-semibold tracking-widest hover:bg-semi-gray hover:text-white hover:translate-x-2 hover:duration-500 hover:rotate-1">

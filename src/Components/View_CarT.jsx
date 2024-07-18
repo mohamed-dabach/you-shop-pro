@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom'
+
 export default function ViewCarT(){
 
-    const orders = useSelector((state) => state.orders);
+    const orders = useSelector((state) => state.orders.orders);
     const dispatch = useDispatch()
     console.log('from view cart',orders)
     return(<>
@@ -26,10 +27,10 @@ export default function ViewCarT(){
            :
            ''
         }
-                { orders  ?
-                    orders.map((order)=>{
-                     return(
-                      <div className=" w-full flex flex-wrap justify-between">
+                { orders && orders.length > 0 ? 
+                 orders.map((order)=>{
+                     return <>
+                        <div className=" w-full flex flex-wrap justify-between">
                         <div className="w-full">
                             <div className=''>
                                <div>
@@ -48,40 +49,34 @@ export default function ViewCarT(){
                                       </div> 
                                       {/* this img just for respo */}
                                   </div>
-                                  <div className='py-3 w-full flex-none lg:flex xl:flex md:flex-none justify-between  '>
+                                  <div className='py-3  w-full flex-none lg:flex xl:flex md:flex-none justify-between  '>
                                         <div className='border-b w-full lg:w-4/12 xl:w-4/12 flex lg:flex xl:flex md:flex justify-between p-3'>
-                                            <div className='flex lg:hidden xl:hidden font-medium '> Product:</div>
-                                            <div className='hidden lg:flex xl:flex ' ><img src="#" alt="img" /></div> 
+                                            <div className='flex items-center lg:hidden xl:hidden font-medium '> Product:</div>
+                                            <div className='hidden items-center lg:flex xl:flex w-20 h-20' ><img src={order.img} alt="img" /></div> 
                                             <div className=' ms-3 font-medium '>{order.title}</div>
                                         </div>
-                                        <div className=' border-b w-full lg:w-2/12 xl:w-2/12 flex justify-between p-3'>
+                                        <div className=' border-b items-center w-full lg:w-2/12 xl:w-2/12 flex justify-between p-3'>
                                             <div className='flex lg:hidden xl:hidden font-medium'>price:</div>
                                             <div>DH {order.price}</div>
                                         </div>
                                         <div className='border-b w-full xl:w-3/12 lg:w-3/12 flex justify-between p-2'>
                                            <div className='flex lg:hidden xl:hidden w-3/12 font-medium'>Quantity:</div>
-                                            <div className=' flex  lg:justify-start xl:justify-start justify-end w-4/12 xl:w-8/12 lg:w-8/12'>
+                                            <div className=' flex items-center lg:justify-start xl:justify-start justify-end w-4/12 xl:w-8/12 lg:w-8/12'>
                                                 <button 
                                                   onClick={() => {
-                                                    dispatch({
-                                                      type: "update_product",
-                                                      payload: { id: order.id, type: "dec" },
-                                                    });
+                                                    dispatch();
                                                   }}
-                                                 className='border bg-gray-100  p-4'>-</button>
-                                                <button className='  px-4 py-2'>{order.count}</button>
+                                                 className='border bg-gray-100 w-12 h-12'>-</button>
+                                                <button className=' w-12 h-12'>{order.count}</button>
                                                 <button
                                                 onClick={()=>{
-                                                    dispatch({
-                                                        type:"update_product",
-                                                        payload: {id:order.id, type:"inc"}
-                                                    })
+                                                    dispatch()
                                                 }}
-                                                 className='border bg-gray-100  px-4'>+</button>
+                                                 className='border bg-gray-100  w-12 h-12'>+</button>
                                             </div>
                                         </div>
-                                        <div className=' border-b w-full xl:w-2/12 lg:w-2/12 flex justify-between p-3'>
-                                            <div className='flex lg:hidden xl:hidden font-medium'>Subtotal:</div>
+                                        <div className=' border-b items-center w-full xl:w-2/12 lg:w-2/12 flex justify-between p-3'>
+                                            <div className='flex  lg:hidden xl:hidden font-medium'>Subtotal:</div>
                                             <div> DH {order.price}</div>
                                         </div>
                                         <div className=' border-b w-1/12 hidden lg:flex xl:flex md:flex justify-center items-center '>
@@ -94,14 +89,14 @@ export default function ViewCarT(){
                             </div>
                         </div>
                       </div>
-                     )
+                     </>
                     })
 
                     :
                     
                     <div>
 
-                      <div className="w-full flex items-center p-4 mb-4 text-sm text-blue-400 border border-blue-300 rounded-lg bg-blue-50  " role="alert">
+                      <div className="w-full flex items-center p-4 my-4 text-sm text-blue-400 border border-blue-300 rounded-lg bg-blue-50  " role="alert">
                         <svg className="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="blue" viewBox="0 0 20 20">
                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                         </svg>
@@ -118,7 +113,7 @@ export default function ViewCarT(){
                 }
                 
             </div>
-             {orders ?
+             {orders && orders.length > 0 ?
                     <div className='  w-full lg:w-4/12 xl:w-4/12 md:w-full ms-0 lg:ps-6 xl:ps-6 md:ps-6 mt-7 xl:mt-0 lg:mt-0 md:mt-0'>
                     <div className='border  '>
                        <div className='bg-gray-100 p-4'>
@@ -145,7 +140,9 @@ export default function ViewCarT(){
                         have you coupon?
                      </div>
                      <div className='w-fullflex justify-center border-s border-e border-b p-4'>
-                        <button className='w-11/12 p-4 font-semibold text-xl bg-primary tracking-widest hover:text-white hover:duration-700 '><Link to={'/'}>CHECKOUT</Link></button>
+                     <Link className="w-full" to={'/checkout'}>
+                        <button className='w-full p-4 font-semibold text-xl bg-primary tracking-widest hover:text-white hover:duration-700 '>CHECKOUT</button>
+                      </Link>
                      </div>
                 </div>
             :
